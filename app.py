@@ -1,12 +1,28 @@
-from flask import Flask
+import socket
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 
+#CONFIG
 app = Flask(__name__)
+# Connecting to mysql database using python sql alchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://csc2033_team39:Sews|ToeGong@localhost:3307/csc2033_team39'
+db = SQLAlchemy(app)
 
 
-@app.route("/")
+@app.route('/')
 def home():
-    return "Hello, World!"
+    return render_template('home.html')
 
+@app.route('/shop')
+def shop():
+    return render_template('shop.html')
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    my_host = "127.0.0.1"
+    free_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    free_socket.bind((my_host, 0))
+    free_socket.listen(5)
+    free_port = free_socket.getsockname()[1]
+    free_socket.close()
+
+    app.run(host=my_host, port=free_port, debug=True)
