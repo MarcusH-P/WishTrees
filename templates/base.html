@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CSC2031</title>
+    <title>CSC2033</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
 </head>
 
@@ -34,22 +34,25 @@
                            <a href="{{ url_for('home') }}" class="navbar-item">
                                Home
                            </a>
-                           <a href=#login class="navbar-item">
+                           <a href="{{ url_for('login')}}" class="navbar-item">
                                Login
                            </a>
-                           <a href=#donate class="navbar-item">
+                           <a href="{{ url_for('profile')}}" class="navbar-item">
+                                Profile
+                           </a>
+                           <a href="{{ url_for('donate')}}" class="navbar-item">
                                DONATE
                            </a>
-                           <a href=#admin class="navbar-item">
+                           <a href="{{ url_for('admin')}}" class="navbar-item">
                                Admin
                            </a>
-                           <a href=#shop class="navbar-item">
+                           <a href="{{ url_for('shop')}}" class="navbar-item">
                                Shop
                            </a>
-                           <a href=#charities class="navbar-item">
+                           <a href="{{ url_for('charities')}}" class="navbar-item">
                                 Charities
                            </a>
-                           <a href=#games class="navbar-item">
+                           <a href="{{ url_for('games')}}" class="navbar-item">
                                 Games
                            </a>
                            <a href={{url_for('about')}} class="navbar-item">
