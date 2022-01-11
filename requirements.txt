@@ -1,2 +1,6 @@
 Flask
 flask_sqlalchemy
+flask_wtf
+Flask-Login
+WTForms
+WerkZeug

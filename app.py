@@ -1,11 +1,15 @@
 import socket
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 #CONFIG
 app = Flask(__name__)
 # Connecting to mysql database using python sql alchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://csc2033_team39:Sews|ToeGong@localhost:3307/csc2033_team39'
+app.config['RECAPTCHA_PUBLIC_KEY'] = "6LdwZQgeAAAAADGS0TsKqD_310OwG1aF2mxliOMD"
+app.config['RECAPTCHA_PRIVATE_KEY'] = "6LdwZQgeAAAAANQRFfcDT9czDaIPD19zx6rblLIG"
+
 db = SQLAlchemy(app)
 
 
