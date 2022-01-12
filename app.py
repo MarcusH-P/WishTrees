@@ -13,6 +13,7 @@ app.config['RECAPTCHA_PRIVATE_KEY'] = "6LdwZQgeAAAAANQRFfcDT9czDaIPD19zx6rblLIG"
 db = SQLAlchemy(app)
 
 
+
 @app.route("/")
 def home():
     return render_template('home.html')
