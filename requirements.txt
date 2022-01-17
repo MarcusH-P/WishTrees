@@ -4,3 +4,7 @@ flask_wtf
 Flask-Login
 WTForms
 WerkZeug
+pyotp
+onetimepass
+pyqrcode
+
