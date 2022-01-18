@@ -22,10 +22,6 @@ class RegisterForm(FlaskForm):
     phone = StringField(validators=[Length(min=10, max=11, message='This is not a valid phone number')])
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20, message='Password must be between 8 and 20 characters in length.')])
     confirm_password = PasswordField(validators=[InputRequired(), EqualTo('password', message='Both password fields must be equal!')])
-
-    # GONNA REPLACE THIS WITH A QR CODE OR A CODE GENERATOR. THE PIN KEY ENTRY IS TEMPORARY
-    pin_key = StringField(validators=[InputRequired(), character_check, Length(max=32, min=32, message='Pin must be 32 characters in length.')])
-
     recaptcha = RecaptchaField
     submit = SubmitField()
 

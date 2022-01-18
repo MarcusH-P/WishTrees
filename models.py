@@ -118,9 +118,9 @@ class Security(UserMixin, db.Model):
     __tablename__ = 'security_login_logout'
 
     event_id = db.Column(db.Integer, primary_key=True)
-    login = db.Column(db.Boolean, nullable=False)
+    login = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, login, email, date):
         self.login = login
@@ -133,7 +133,7 @@ class SecurityError(UserMixin, db.Model):
 
     error_id = db.Column(db.Integer, primary_key=True)
     error = db.Column(db.Boolean, nullable=False)
-    date = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, error, date):
         self.error = error
@@ -148,6 +148,6 @@ def init_db():
                  firstname='Alice',
                  lastname='Jones',
                  role='admin',
-                 phone='')
+                 phone=None)
     db.session.add(admin)
     db.session.commit()

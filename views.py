@@ -4,7 +4,7 @@ import pyqrcode
 from io import BytesIO
 from flask import render_template, flash, redirect, url_for, request, session, Blueprint
 from forms import RegisterForm, LoginForm
-from models import User
+from models import User, Security
 from app import db
 from werkzeug.security import check_password_hash
 from flask_login import login_user, current_user, logout_user, login_required
@@ -74,9 +74,11 @@ def login():
             elif logger >= 3:
                 flash('Number of incorrect logins exceeded')
 
-            logging.warning('SECURITY - Failed login attempt [%s, %s]', form.email.data,
-                            request.remote_addr)  # NEED TO FIX IP LOGGING THEN MAYBE SET UP LOCKOUTS BASED ON IP??
-
+            failed_login = Security(  # Adds failed login event to security_login_logout
+                login='failed login',
+                email=form.email,
+                date=datetime.now())
+            db.session.add(failed_login)
             return render_template('login.html', form=form)
 
         if pyotp.TOTP(user.pin_key).verify(form.pin.data):
@@ -88,10 +90,15 @@ def login():
             user.last_logged_in = user.current_logged_in
             user.current_logged_in = datetime.now()
             user.otp_setup = True
+
+            new_login = Security(  # Adds login event to security_login_logout
+                            login='login',
+                            email=form.email,
+                            date=datetime.now())
+            db.session.add(new_login)
             db.session.add(user)
             db.session.commit()
-            logging.warning('SECURITY - Log in [%s, %s, %s]', current_user.id, current_user.email,
-                            request.remote_addr)
+
             if current_user.role == 'user':
                 return render_template('home.html')
             elif current_user.role == 'admin':
@@ -136,3 +143,15 @@ def qrcode():
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0'}
+
+
+@users_blueprint.route('/logout')
+@login_required
+def logout():
+    new_logout = Security(  # Adds login event to security_login_logout
+        login='logout',
+        email=current_user.email,
+        date=datetime.now())
+    logout_user()
+    db.session.add(new_logout)
+    return redirect(url_for('index'))
