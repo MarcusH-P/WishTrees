@@ -67,7 +67,7 @@ def email_users(recipient, user_points):  # TODO
         smtp.send_message(email_contents)
 
 
-user = "marcushuntlypeck@gmail.com"
+user = ""
 points = 1000
 
 # email_users(user, points)
