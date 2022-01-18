@@ -1,11 +1,16 @@
 import smtplib
 from email.message import EmailMessage
+import random
 
 
-def get_cpu_image():
-    cpu_list = [
-
+def get_cpu_image():  # TODO return a random CPU image URL
+    cpu_list = [  # List of CPU images here
+        "1",
+        "2",
+        "3"
     ]
+
+    return random.choice(cpu_list)
 
 
 def email_users(recipient, user_points):  # TODO
@@ -30,7 +35,7 @@ def email_users(recipient, user_points):  # TODO
         <! WishTrees Logo >
         <img src="https://lh3.googleusercontent.com/-PI4eFXKhlMV0sasSV4Bh-N1XDu8eVW50piS9QkbK9uQzqVIYw2Obkh-tbMe-N2KodvmsY2IxzlV-nHAzyHr4i63tvUWi-GOQEQU19cSorEpygE0xzK7_AYdy-vroq94-P04CuUh1xQ2pcyq43zGKCfbHmDQI_UP-QjzfdvsLijKQt2CKNz6ROa04u95nPqlI5UglG3fipAJls75Hf3f2KHAbhzoaRul8Z-jnDlji-FhH9tjl7-EkCWNJAXDJtFQSTdYMvi5n6a4IXl52Rm6xECUNsRKmIO_QrvId7C2apg9mAI1-RAE0Iu0dj3N6hEaHJDoolWlCJPSF9Ij_COupHjhUgyM2tVzi3R_0r1ylvIRpLoE8HVMmHZYYLnhmM_pLtkEmQDCYAbnhvPPUN3LDOArCqB-qNG_ONmXTND-NRyHYsIZ2aGlLvk8OvBFNlXSVhwIncsbcUqeVs9PviRxuTAR9PEcHikgDN_tLSoX61nqB6xmaMTIdEwQSqN9PmzNN4zSpcSVb42SPKbF6tMWaJHJjmFeJrJi-UmfOxSWwQKdYwsWL548no07gHwOqMASqnSD4QsP0eHtlCCwINnhOefuvK00FXVlBKixq5fnknrOADTYX1ohTl-7JUNGYi2ssggBgd1zxvqyF3wXyOkvYOGUGY0b5SOzTnJ2TxPqgsRKaok2FFeoBM434UD8hTssfBL3aXbLJTnz-ewy=w3360-h946-no" alt="WishTrees Logo" width="90%">
         <br><h1 style="color: #c993dc">Here's your point summary</h1>
-        <h2 style="color: #c993dc">""" + str(user_points) + """"</h2>
+        <h2 style="color: #c993dc">""" + str(user_points) + """</h2>
         <br>
         <h1 style="color: #c993dc">How about a random charity to donate to?</h1>
     </body>
@@ -65,4 +70,4 @@ def email_users(recipient, user_points):  # TODO
 user = "marcushuntlypeck@gmail.com"
 points = 1000
 
-email_users(user, points)
+# email_users(user, points)
