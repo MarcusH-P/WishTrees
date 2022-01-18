@@ -3,7 +3,7 @@ import pyotp
 import pyqrcode
 from io import BytesIO
 from flask import render_template, flash, redirect, url_for, request, session, Blueprint
-from forms import RegisterForm, LoginForm
+from user.forms import RegisterForm, LoginForm
 from models import User
 from app import db
 from werkzeug.security import check_password_hash
