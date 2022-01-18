@@ -10,8 +10,6 @@ from werkzeug.security import generate_password_hash
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-
     # User authentication information.
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
@@ -28,7 +26,7 @@ class User(UserMixin, db.Model):
     lastname = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(100), nullable=False)
     role = db.Column(db.String(100), nullable=False, default='user')
-    user_key = db.Column(db.String(100), nullable=False)
+    user_key = db.Column(db.String(100), nullable=False, primary_key=True)
 
     def __init__(self, email, firstname, lastname, phone, password, role):
         self.email = email
@@ -66,12 +64,87 @@ class Product(UserMixin, db.Model):
         self.product_colour = product_colour
         self.charity_name = charity_name
 
+
+class Order(UserMixin, db.Model):
+    __tablename__ = 'order_history'
+
+    order_id = db.Column(db.Integer, primary_key=True)
+    product_number = db.Column(db.String(100), nullable=False)
+    user_key = db.Column(db.String(100), nullable=False)
+    address_line_1 = db.Column(db.String(100), nullable=False)
+    address_line_2 = db.Column(db.String(100), nullable=False)
+    city_town = db.Column(db.String(100), nullable=False)
+    county = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, product_number, user_key, address_line_1, address_line_2, city_town, county, date):
+        self.product_number = product_number
+        self.user_key = user_key
+        self.address_line_1 = address_line_1
+        self.address_line_2 = address_line_2
+        self.city_town = city_town
+        self.county = county
+        self.date = date
+
+
+class QuizHistory(UserMixin, db.Model):
+    __tablename__ = 'quiz_history'
+
+    quiz_event_id = db.Column(db.Integer, primary_key=True)
+    quiz_key = db.Column(db.String(100), nullable=False)
+    user_key = db.Column(db.String(100), nullable=False)
+    score = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, quiz_key, user_key, score):
+        self.quiz_key = quiz_key
+        self.user_key = user_key
+        self.score = score
+
+
+class Quiz(UserMixin, db.Model):
+    __tablename__ = 'quiz_game'
+
+    quiz_key = db.Column(db.String(100), nullable=False, primary_key=True)
+    question_number = db.Column(db.String(100), nullable=False)
+    question = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, quiz_key, question_number, question):
+        self.quiz_key = quiz_key
+        self.question_number = question_number
+        self.question = question
+
+
+class Security(UserMixin, db.Model):
+    __tablename__ = 'security_login_logout'
+
+    event_id = db.Column(db.Integer, primary_key=True)
+    login = db.Column(db.Boolean, nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, login, email, date):
+        self.login = login
+        self.email = email
+        self.date = date
+
+
+class SecurityError(UserMixin, db.Model):
+    __tablename__ = 'security_page_error'
+
+    error_id = db.Column(db.Integer, primary_key=True)
+    error = db.Column(db.Boolean, nullable=False)
+    date = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, error, date):
+        self.error = error
+        self.date = date
+
+
 def init_db():
     db.drop_all()
     db.create_all()
     admin = User(email='admin@email.com',
                  password='Admin1!',
-                 otp_secret='BFB5S34STBLZCOB22K6PPYDCMZMH46OJ',
                  firstname='Alice',
                  lastname='Jones',
                  role='admin',

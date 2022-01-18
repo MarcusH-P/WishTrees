@@ -63,7 +63,6 @@ def login():
         session['logins'] += 1
         logger = session['logins']
 
-
         user = User.query.filter_by(email=form.email.data).first()
 
         if not user or not check_password_hash(user.password, form.password.data):
@@ -96,7 +95,7 @@ def login():
             if current_user.role == 'user':
                 return render_template('home.html')
             elif current_user.role == 'admin':
-                return render_template('admin.html', name=current_user.firstname + ' ' + current_user.lastname)
+                return render_template('admin.html')
 
 
         else:
@@ -108,27 +107,25 @@ def login():
 def two_factor_setup():
     if 'email' not in session:
         return redirect(url_for('home'))
-    user = User.query.filter_by(username=session['username']).first()
+    user = User.query.filter_by(email=session['email']).first()
     if user is None:
         return redirect(url_for('home'))
-    # since this page contains the sensitive qrcode, make sure the browser
-    # does not cache it
+
     return render_template('2faSetup.html'), 200, {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
-        'Expires': '0'}
+        'Expires': '0'}  # Since the page includes sensitive information, this ensures sure the browser does not cache it and save the QR code
 
 
 @users_blueprint.route('/qrcode')
 def qrcode():
-    if 'username' not in session:
+    if 'email' not in session:
         return render_template('404.html')
-    user = User.query.filter_by(username=session['username']).first()
+    user = User.query.filter_by(email=session['email']).first()
     if user is None:
         return render_template('404.html')
 
-    # for added security, remove username from session
-    del session['username']
+    del session['email']
 
     # render qrcode
     url = pyqrcode.create(user.get_uri())
