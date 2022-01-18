@@ -5,57 +5,74 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CSC2033</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <title>WishTrees</title>
+    <link rel="icon" type="image/x-icon" href="https://lh3.googleusercontent.com/pw/AM-JKLXTpG992L13u-rvFM390Dz1tyQiLxBMosFw6WNVMLZUyxULf9BI50015ylcuS01ReL3EjuGGrEBV5GZmQOWMlp9qufeu5IwY4AQXxNBncH93nTKSBV3XPxAmR7Rja02VRwgr2GkCzUU0rfEW28o5w=w879-h902-no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
 </head>
 
 <body>
 
     <style>
+
     .table {
       margin-left: auto;
       margin-right: auto;
     }
+
+    .logo{
+        position:fixed;
+        top: 8px;
+        left: 16px;
+        font-size: 18px;
+    }
+
+    .footer {
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
     body {
-    background-color: #fff8cd;
-    font-family: "Times New Roman", Times, serif;
-    color: #c993dc;
+        font-family: "Times New Roman", Times, serif;
     }
     </style>
 
-    <section class="hero is-primary is-fullheight">
+    <section class="hero is-fullheight" style="background-color: #fff8cd; color: #c993dc;" >
 
-        <div class="hero-head">
+
+        <div class="hero-head" style="color: #c993dc;">
             <nav class="navbar">
                 <div class="container">
 
                     <div id="navbarMenuHeroA" class="navbar-menu">
                        <div class="navbar-end">
-                           <a href="{{ url_for('home') }}" class="navbar-item">
+                           <img src="https://lh3.googleusercontent.com/pw/AM-JKLW4VYOR4dU9h4JzJsuNtnrqv2mktXIPtxyobM1uqXIrmN_ylHNYbgbmJ4toX0UCJFkomt_8aHYzdbcmVmFQdveCa8s-I5507xo5cjgscqCtV4XnLzWR9HJcfOas2CDmEEuXbzipnUjlMItej0ojzg=w1920-h540-no" alt="logo" class="logo" width="200" height="20">
+                           <a href="{{ url_for('home') }}" class="navbar-item"  style=" color: #c993dc;">
                                Home
                            </a>
-                           <a href="{{ url_for('login')}}" class="navbar-item">
+                           <a href="{{ url_for('login')}}" class="navbar-item"  style=" color: #c993dc;">
                                Login
                            </a>
-                           <a href="{{ url_for('profile')}}" class="navbar-item">
-                                Profile
+                           <a href="{{ url_for('profile')}}" class="navbar-item"  style=" color: #c993dc;">
+                               Profile
                            </a>
-                           <a href="{{ url_for('donate')}}" class="navbar-item">
+                           <a href="{{ url_for('donate')}}" class="navbar-item"  style=" color: #c993dc;">
                                DONATE
                            </a>
-                           <a href="{{ url_for('admin')}}" class="navbar-item">
+                           <a href="{{ url_for('admin')}}" class="navbar-item" style=" color: #c993dc;">
                                Admin
                            </a>
-                           <a href="{{ url_for('shop')}}" class="navbar-item">
+                           <a href="{{ url_for('shop')}}" class="navbar-item" style=" color: #c993dc;">
                                Shop
                            </a>
-                           <a href="{{ url_for('charities')}}" class="navbar-item">
-                                Charities
+                           <a href="{{ url_for('charities')}}" class="navbar-item" style=" color: #c993dc;">
+                               Charities
                            </a>
-                           <a href="{{ url_for('games')}}" class="navbar-item">
-                                Games
+                           <a href="{{ url_for('games')}}" class="navbar-item" style=" color: #c993dc;">
+                               Games
                            </a>
-                           <a href={{url_for('about')}} class="navbar-item">
+                           <a href={{url_for('about')}} class="navbar-item" style=" color: #c993dc;">
                                About
                            </a>
                        </div>
@@ -71,6 +88,16 @@
             </div>
         </div>
     </section>
+    <figure class="image is-1920x306 has-text-centered" style="position: absolute">
+        <img src="https://images-ext-1.discordapp.net/external/FfrVrZtXg0Z_6lWGhSan-BG_zUXVu4DoJXFbxN2Uh5Q/https/lh3.googleusercontent.com/pw/AM-JKLUR3-FjCppm_GrTc8z7uoBbmkEBna_blYBacdqEwPmRIR17rzpjPmbImq4Ayp4AhWIMpctlw4FAdlrQXOxzrHprv0pgYnUWiYdF-LSpDoeCBFDMEAa-DHZraJ5GHU0T2Qw9aa57D-NvPLwzwmQKPA%3Dw1920-h306-no" alt="footer">
+        <figure class="image is-64x64 is-inline-block"  style="position: relative; display: block; margin-left: auto; margin-right: auto;">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLUX4arN90ICXaWAQ7cHc-61JhL8FBRLEFq6gOezCADv18pQi26W-RX1-A86zv7VeZ5efqHh_akcli0ASfT_vENCafIIlqZcimp-Ietrulb82JzqEVhZmW-6ca2aA70Zz7KV_P_UAApRH1ZdY3ZHpw=w175-h174-no" alt="facebook_icon">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLXLSGBNryTv-kyav4qrTW_srto0Hedav7lTYt8OgsU_PyJ0TC4zs8K-jdrPO6PFQZmE_jJebPZqgP7bpmyhUTkYlUdkQC8hpamnbg9jA0CkXWuBYKZRBSQZcE6PmQgTQLQmozxzUKYpChKOCfEWcg=w175-h174-no" alt="insta_icon">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLXtk8QRy6taNzTe4wFTuYf0G5OPrUBmDDFeSJfWOmidtx98STNNcDZR7jihz2iUvUjUYEts_XzTfRJcsPjNBlBgHDvr40rukG5TYpuG3S17rVQKzlVXiwhW7FJH4FjTB1KP8h-fe_FAWwz6AQUB5A=w175-h174-no" alt="twitter_icon">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLUzv5u5nFqfoHMiavW7xzMZHQnxuNSFrnH9YehSVF1LaGgbH3NDPACtyiSZhFxbOWgGgwxNOjTi98outozgC8A48RZI7XsgBWS8uZJVr9Tcar2RBvDQ_gw5AKs76CmWkOctQde05t648q4NIUYoSg=w175-h174-no" alt="yt_icon">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLWxPqfAMd2-L57SRS6FvUhRSXRWn2Dp35fsycWr6ympWTmXKU1_SYiTKNos6KNTXKUGEnzrJlXfF1r4eL-rkKVC2J1M8chEBWUTnbSBxI7W0mc6r8wud3rZWbkRrzpzZU_GaoH0wKyIMmon_eIirQ=w175-h174-no" alt="in_icon">
+        </figure>
+    </figure>
 </body>
 
 </html>

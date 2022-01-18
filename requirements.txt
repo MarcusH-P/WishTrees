@@ -1,10 +1,22 @@
 Flask
-flask_sqlalchemy
-flask_wtf
+click
+itsdangerous
+Jinja2
+MarkupSafe
+pip
+setuptools
+Werkzeug
+Flask-SQLAlchemy
 Flask-Login
-WTForms
-WerkZeug
+Flask-Talisman
 pyotp
+pycryptodome
+SQLAlchemy
+WTForms
+cryptography
+Flask-WTF
+email-validator
+bulma
 onetimepass
 pyqrcode
 
