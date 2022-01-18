@@ -17,3 +17,6 @@ cryptography
 Flask-WTF
 email-validator
 bulma
+onetimepass
+pyqrcode
+

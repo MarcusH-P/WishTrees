@@ -1,13 +1,20 @@
+import logging
+import pyotp
+import pyqrcode
+from io import BytesIO
 from flask import render_template, flash, redirect, url_for, request, session, Blueprint
 from forms import RegisterForm, LoginForm
 from models import User
 from app import db
 from werkzeug.security import check_password_hash
+from flask_login import login_user, current_user, logout_user, login_required
+from datetime import datetime
 
 # CONFIG
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
-@users_blueprint.route('/register', methods=['GET', 'POST']) # I DONT UNDERSTAND THE @users_blueprint.route
+
+@users_blueprint.route('/register', methods=['GET', 'POST'])  # I DONT UNDERSTAND THE @users_blueprint.route
 def register():
     # create signup form object
     form = RegisterForm()
@@ -18,8 +25,8 @@ def register():
         # if this returns a user, then the email already exists in database
 
         # if email already exists redirect user back to signup page with error message so user can try again
-        if user:
-            flash('Email address already exists')
+        if user and user.otp_setup:
+            flash('Sorry. An account for that email already exists')
             return render_template('register.html', form=form)
 
         # create a new user with the form data
@@ -28,7 +35,6 @@ def register():
                         lastname=form.lastname.data,
                         phone=form.phone.data,
                         password=form.password.data,
-                        pin_key=form.pin_key.data,
                         role='user')
 
         # add the new user to the database
@@ -36,11 +42,15 @@ def register():
         db.session.commit()
 
         # sends user to login page
-        return redirect(url_for('login'))
+        # redirect to the two-factor auth page, passing username in session
+        session['email'] = user.email
+        return redirect(url_for('2fa_setup'))
+
     # if request method is GET or form not valid re-render signup page
     return render_template('register.html', form=form)
 
-@users_blueprint.route('/login', methods=['GET', 'POST']) # AGAIN DONT UNDERSTAND @users_blueprint.route
+
+@users_blueprint.route('/login', methods=['GET', 'POST'])  # AGAIN DON'T UNDERSTAND @users_blueprint.route
 def login():
 
     # if session attribute logins does not exist create attribute logins
@@ -49,10 +59,9 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        #to increase login attempts
+        # to increase login attempts
         session['logins'] += 1
         logger = session['logins']
-
 
         user = User.query.filter_by(email=form.email.data).first()
 
@@ -65,8 +74,10 @@ def login():
             elif logger >= 3:
                 flash('Number of incorrect logins exceeded')
 
+            logging.warning('SECURITY - Failed login attempt [%s, %s]', form.email.data,
+                            request.remote_addr)  # NEED TO FIX IP LOGGING THEN MAYBE SET UP LOCKOUTS BASED ON IP??
+
             return render_template('login.html', form=form)
-            logging.warning('SECURITY - Failed login attempt [%s, %s]', form.email.data, request.remote_addr) # NEED TO FIX IP LOGGING THEN MAYBE SET UP LOCKOUTS BASED ON IP??
 
         if pyotp.TOTP(user.pin_key).verify(form.pin.data):
             login_user(user)
@@ -76,16 +87,52 @@ def login():
 
             user.last_logged_in = user.current_logged_in
             user.current_logged_in = datetime.now()
+            user.otp_setup = True
             db.session.add(user)
             db.session.commit()
             logging.warning('SECURITY - Log in [%s, %s, %s]', current_user.id, current_user.email,
                             request.remote_addr)
             if current_user.role == 'user':
-                return profile()
+                return render_template('home.html')
             elif current_user.role == 'admin':
-                return render_template('admin.html', name=current_user.firstname + ' ' + current_user.lastname)
+                return render_template('admin.html')
 
 
         else:
             flash("You have supplied an invalid 2FA token!", "danger")
     return render_template('login.html', form=form)
+
+
+@users_blueprint.route('/twofactor')
+def two_factor_setup():
+    if 'email' not in session:
+        return redirect(url_for('home'))
+    user = User.query.filter_by(email=session['email']).first()
+    if user is None:
+        return redirect(url_for('home'))
+
+    return render_template('2faSetup.html'), 200, {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'}  # Since the page includes sensitive information, this ensures sure the browser does not cache it and save the QR code
+
+
+@users_blueprint.route('/qrcode')
+def qrcode():
+    if 'email' not in session:
+        return render_template('404.html')
+    user = User.query.filter_by(email=session['email']).first()
+    if user is None:
+        return render_template('404.html')
+
+    del session['email']
+
+    # render qrcode
+    url = pyqrcode.create(user.get_uri())
+    stream = BytesIO()
+    url.svg(stream, scale=5)
+    return stream.getvalue(), 200, {
+        'Content-Type': 'image/svg+xml',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'}
