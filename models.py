@@ -15,18 +15,20 @@ class User(UserMixin, db.Model):
     # User authentication information.
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
-    pin_key = db.Column(db.String(100), nullable=False)
+    otp_secret = db.Column(db.String(100), nullable=False)
 
     # User activity information
     registered_on = db.Column(db.DateTime, nullable=False)
     last_logged_in = db.Column(db.DateTime, nullable=True)
     current_logged_in = db.Column(db.DateTime, nullable=True)
+    otp_setup = db.Column(db.Boolean, nullable=True)
 
     # User information
     firstname = db.Column(db.String(100), nullable=False)
     lastname = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(100), nullable=False)
     role = db.Column(db.String(100), nullable=False, default='user')
+    user_key = db.Column(db.String(100), nullable=False)
 
     def __init__(self, email, firstname, lastname, phone, password, role):
         self.email = email
@@ -50,12 +52,26 @@ class User(UserMixin, db.Model):
         return onetimepass.valid_totp(self.otp_secret, token)
 
 
+class Product(UserMixin, db.Model):
+    __tablename__ = 'products'
+
+    product_number = db.Column(db.String(100), nullable=False, primary_key=True)
+    product_type = db.Column(db.String(100), nullable=False)
+    product_colour = db.Column(db.String(100), nullable=False)
+    charity_name = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, product_number, product_type, product_colour, charity_name):
+        self.product_number = product_number
+        self.product_type = product_type
+        self.product_colour = product_colour
+        self.charity_name = charity_name
+
 def init_db():
     db.drop_all()
     db.create_all()
     admin = User(email='admin@email.com',
                  password='Admin1!',
-                 pin_key='BFB5S34STBLZCOB22K6PPYDCMZMH46OJ',
+                 otp_secret='BFB5S34STBLZCOB22K6PPYDCMZMH46OJ',
                  firstname='Alice',
                  lastname='Jones',
                  role='admin',
