@@ -92,6 +92,10 @@ def admin():
 def login():
     return render_template('login.html')
 
+@app.route("/register")
+def register():
+    return render_template('register.html')
+
 
 if __name__ == '__main__':
     my_host = "127.0.0.1"
