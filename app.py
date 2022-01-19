@@ -5,7 +5,7 @@ from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from datetime import datetime
 
-#CONFIG
+# CONFIG
 app = Flask(__name__)
 # Connecting to mysql database using python sql alchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://csc2033_team39:Sews|ToeGong@localhost:3307/csc2033_team39'
@@ -66,8 +66,6 @@ def service_unavailable(error):
     db.session.add(error)
     db.session.commit()
     return render_template('503.html'), 503
-
-
 
 
 @app.route("/")
