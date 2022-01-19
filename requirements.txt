@@ -19,4 +19,5 @@ email-validator
 bulma
 onetimepass
 pyqrcode
+pymysql
 

@@ -1,4 +1,3 @@
-import logging
 import pyotp
 import pyqrcode
 from io import BytesIO
@@ -14,7 +13,7 @@ from datetime import datetime
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 
-@users_blueprint.route('/register', methods=['GET', 'POST'])  # I DONT UNDERSTAND THE @users_blueprint.route
+@users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     # create signup form object
     form = RegisterForm()
@@ -25,7 +24,7 @@ def register():
         # if this returns a user, then the email already exists in database
 
         # if email already exists redirect user back to signup page with error message so user can try again
-        if user and user.otp_setup:
+        if user:  # I WANNA ADD A FUNCTION SO THAT IF THE USER HASNT LOGGED IN THEN THEY CAN REGISTER AGAIN !!DELETING THEIR OLD ACCOUNT FIRST!!!!!
             flash('Sorry. An account for that email already exists')
             return render_template('register.html', form=form)
 
@@ -41,16 +40,15 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        # sends user to login page
-        # redirect to the two-factor auth page, passing username in session
-        session['email'] = user.email
-        return redirect(url_for('2fa_setup'))
+        # sends user to 2fa
+        session['email'] = new_user.email
+        return redirect(url_for('users.two_factor_setup'))
 
     # if request method is GET or form not valid re-render signup page
     return render_template('register.html', form=form)
 
 
-@users_blueprint.route('/login', methods=['GET', 'POST'])  # AGAIN DON'T UNDERSTAND @users_blueprint.route
+@users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
 
     # if session attribute logins does not exist create attribute logins
@@ -79,9 +77,10 @@ def login():
                 email=form.email,
                 date=datetime.now())
             db.session.add(failed_login)
+            db.session.commit()
             return render_template('login.html', form=form)
 
-        if pyotp.TOTP(user.pin_key).verify(form.pin.data):
+        if pyotp.TOTP(user.otp_secret).verify(form.otp.data):
             login_user(user)
 
             # if user is verified reset login attempts to 0
@@ -117,8 +116,8 @@ def two_factor_setup():
     user = User.query.filter_by(email=session['email']).first()
     if user is None:
         return redirect(url_for('home'))
-
-    return render_template('2faSetup.html'), 200, {
+    print("LOADING 2fasetup.html")  # TODO Remove
+    return render_template('2fasetup.html'), 200, {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0'}  # Since the page includes sensitive information, this ensures sure the browser does not cache it and save the QR code
@@ -133,7 +132,7 @@ def qrcode():
         return render_template('404.html')
 
     del session['email']
-
+    print("QR TEST PASSED")  # TODO Remove
     # render qrcode
     url = pyqrcode.create(user.get_uri())
     stream = BytesIO()
@@ -154,4 +153,5 @@ def logout():
         date=datetime.now())
     logout_user()
     db.session.add(new_logout)
+    db.session.commit()
     return redirect(url_for('index'))
