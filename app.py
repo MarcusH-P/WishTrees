@@ -98,11 +98,6 @@ def donate():
     return render_template('donate.html')
 
 
-@app.route("/profile")
-def profile():
-    return render_template('profile.html')
-
-
 @app.route("/admin")
 def admin():
     return render_template('admin.html')
