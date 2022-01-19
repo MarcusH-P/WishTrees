@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap
 from models import SecurityError
 from datetime import datetime
 
-#CONFIG
+# CONFIG
 app = Flask(__name__)
 # Connecting to mysql database using python sql alchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://csc2033_team39:Sews|ToeGong@localhost:3307/csc2033_team39'
@@ -69,8 +69,6 @@ def service_unavailable(error):
     return render_template('503.html'), 503
 
 
-
-
 @app.route("/")
 def home():
     return render_template('home.html')
@@ -109,9 +107,6 @@ def profile():
 @app.route("/admin")
 def admin():
     return render_template('admin.html')
-
-
-
 
 
 if __name__ == '__main__':
