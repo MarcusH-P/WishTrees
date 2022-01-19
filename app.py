@@ -3,6 +3,8 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
+from models import SecurityError
+from datetime import datetime
 
 #CONFIG
 app = Flask(__name__)
@@ -19,33 +21,51 @@ db = SQLAlchemy(app)
 # ERROR PAGE VIEWS Reference from CSC2021
 @app.errorhandler(400)
 def bad_request(error):
-    # Adding page 500 error to the security logs
+    error = SecurityError(  # Adds error event to security_page_error
+        error='400',
+        date=datetime.now())
+    db.session.add(error)
+    db.session.commit()
     return render_template('400.html'), 400
 
 
 @app.errorhandler(403)
 def forbidden(error):
-    # Adding page 500 error to the security logs
+    error = SecurityError(  # Adds error event to security_page_error
+        error='403',
+        date=datetime.now())
+    db.session.add(error)
+    db.session.commit()
     return render_template('403.html'), 403
 
 
 @app.errorhandler(404)
 def not_found(error):
-    # Adding page 500 error to the security logs
+    error = SecurityError(  # Adds error event to security_page_error
+        error='404',
+        date=datetime.now())
+    db.session.add(error)
+    db.session.commit()
     return render_template('404.html'), 404
 
 
 @app.errorhandler(500)
 def internal_error(error):
-    # Adding page 500 error to the security logs
-
+    error = SecurityError(  # Adds error event to security_page_error
+        error='500',
+        date=datetime.now())
+    db.session.add(error)
+    db.session.commit()
     return render_template('500.html'), 500
 
 
 @app.errorhandler(503)
 def service_unavailable(error):
-    # Adding page 500 error to the security logs
-
+    error = SecurityError(  # Adds error event to security_page_error
+        error='503',
+        date=datetime.now())
+    db.session.add(error)
+    db.session.commit()
     return render_template('503.html'), 503
 
 
@@ -92,10 +112,6 @@ def admin():
 
 
 
-
-@app.route("/register")
-def register():
-    return render_template('register.html')
 
 
 if __name__ == '__main__':
