@@ -2,8 +2,8 @@
 
 {% block content %}
     <div class="column is-4 is-offset-4">
-        <h3 class="title">Login</h3>
-        <div class="box">
+        <h3 class="title" style="color: #c993dc">Login</h3>
+        <div class="box" style="background-color: #c993dc">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     <div class="notification is-danger">
@@ -40,7 +40,7 @@
                     </div>
 
                     <div>
-                        {{ form.submit(class="button is-info is-centered") }}
+                        {{ form.submit(class="button is-info is-centered",  style="background-color: #000732") }}
                     </div>
                 </form>
             {% endif %}
