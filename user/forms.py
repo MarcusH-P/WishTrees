@@ -5,7 +5,7 @@ from wtforms.validators import InputRequired, Email, Length, EqualTo, Validation
 
 # Character check to check for special characters (prevents security exploits)
 
-def character_check(field):
+def character_check(form,field):
     excluded_chars = "*?!'^+%&/()=}][{$#@<>"
     for char in field.data:
         if char in excluded_chars:
@@ -22,11 +22,6 @@ class RegisterForm(FlaskForm):
     phone = StringField(validators=[Length(min=10, max=11, message='This is not a valid phone number')])
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20, message='Password must be between 8 and 20 characters in length.')])
     confirm_password = PasswordField(validators=[InputRequired(), EqualTo('password', message='Both password fields must be equal!')])
-
-    # GONNA REPLACE THIS WITH A QR CODE OR A CODE GENERATOR. THE PIN KEY ENTRY IS TEMPORARY
-    pin_key = StringField(validators=[InputRequired(), character_check, Length(max=32, min=32, message='Pin must be 32 characters in length.')])
-
-    recaptcha = RecaptchaField
     submit = SubmitField()
 
     # Password validator
@@ -39,5 +34,5 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = StringField(validators=[InputRequired(), Email()])
     password = PasswordField(validators=[InputRequired()])
-    pin = StringField(validators=[InputRequired()])
+    otp = StringField(validators=[InputRequired()])
     submit = SubmitField()

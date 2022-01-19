@@ -3,6 +3,7 @@ import base64
 import os
 import onetimepass
 from app import db
+from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 
@@ -12,7 +13,7 @@ class User(UserMixin, db.Model):
 
     # User authentication information.
     email = db.Column(db.String(100), nullable=False, unique=True)
-    password = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
     otp_secret = db.Column(db.String(100), nullable=False)
 
     # User activity information
@@ -24,9 +25,12 @@ class User(UserMixin, db.Model):
     # User information
     firstname = db.Column(db.String(100), nullable=False)
     lastname = db.Column(db.String(100), nullable=False)
-    phone = db.Column(db.String(100), nullable=False)
+    phone = db.Column(db.String(100), nullable=True)
     role = db.Column(db.String(100), nullable=False, default='user')
-    user_key = db.Column(db.String(100), nullable=False, primary_key=True)
+    user_key = db.Column(db.Integer, nullable=False, primary_key=True)
+
+    def get_id(self):
+        return self.user_key
 
     def __init__(self, email, firstname, lastname, phone, password, role):
         self.email = email
@@ -118,9 +122,9 @@ class Security(UserMixin, db.Model):
     __tablename__ = 'security_login_logout'
 
     event_id = db.Column(db.Integer, primary_key=True)
-    login = db.Column(db.Boolean, nullable=False)
+    login = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, login, email, date):
         self.login = login
@@ -133,7 +137,7 @@ class SecurityError(UserMixin, db.Model):
 
     error_id = db.Column(db.Integer, primary_key=True)
     error = db.Column(db.Boolean, nullable=False)
-    date = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, error, date):
         self.error = error
@@ -148,6 +152,7 @@ def init_db():
                  firstname='Alice',
                  lastname='Jones',
                  role='admin',
-                 phone='')
+                 otp_secret='AWNNDREYD7E4I2NA',
+                 phone=None)
     db.session.add(admin)
     db.session.commit()
