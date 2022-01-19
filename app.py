@@ -2,7 +2,7 @@ import socket
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-
+from flask_bootstrap import Bootstrap
 
 #CONFIG
 app = Flask(__name__)
@@ -12,6 +12,7 @@ app.config['RECAPTCHA_PUBLIC_KEY'] = "6LdwZQgeAAAAADGS0TsKqD_310OwG1aF2mxliOMD"
 app.config['RECAPTCHA_PRIVATE_KEY'] = "6LdwZQgeAAAAANQRFfcDT9czDaIPD19zx6rblLIG"
 app.config['SECRET_KEY'] = 'LongAndRandomSecretKey'
 
+bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 
 
@@ -78,7 +79,7 @@ if __name__ == '__main__':
         return User.query.get(user_key)
 
     # import blueprints
-    from views import users_blueprint
+    from user.views import users_blueprint
 
     # register blueprints with app
     app.register_blueprint(users_blueprint)
