@@ -3,7 +3,6 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
-from models import SecurityError
 from datetime import datetime
 
 #CONFIG
@@ -111,9 +110,6 @@ def admin():
     return render_template('admin.html')
 
 
-
-
-
 if __name__ == '__main__':
     my_host = "127.0.0.1"
     free_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -125,7 +121,7 @@ if __name__ == '__main__':
     login_manager.login_view = 'users.login'
     login_manager.init_app(app)
 
-    from models import User
+    from models import User, SecurityError
 
 
     @login_manager.user_loader

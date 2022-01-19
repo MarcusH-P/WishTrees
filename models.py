@@ -111,11 +111,15 @@ class Quiz(UserMixin, db.Model):
     quiz_key = db.Column(db.String(100), nullable=False, primary_key=True)
     question_number = db.Column(db.String(100), nullable=False)
     question = db.Column(db.String(100), nullable=False)
+    answer = db.Column(db.String(100), nullable=False)
+    false_answers = db.Column(db.JSON, nullable=False)
 
-    def __init__(self, quiz_key, question_number, question):
+    def __init__(self, quiz_key, question_number, question, answer, false_answers):
         self.quiz_key = quiz_key
         self.question_number = question_number
         self.question = question
+        self.answer = answer
+        self.false_answers = false_answers
 
 
 class Security(UserMixin, db.Model):
@@ -136,7 +140,7 @@ class SecurityError(UserMixin, db.Model):
     __tablename__ = 'security_page_error'
 
     error_id = db.Column(db.Integer, primary_key=True)
-    error = db.Column(db.Boolean, nullable=False)
+    error = db.Column(db.String(100), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, error, date):
