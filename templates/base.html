@@ -26,12 +26,46 @@
         font-size: 18px;
     }
 
-    .footer {
-            position: relative;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-        }
+    .column1{
+        float: left;
+        width: 20%;
+        padding: 5px;
+    }
+
+    .row::after {
+        display: table;
+        content: "";
+        clear: both;
+}
+    .footer1 {
+        position: absolute;
+        top: 5px;
+        left: 400px;
+    }
+
+    .footer2 {
+        position: absolute;
+        top: 5px;
+        left: 500px;
+    }
+
+    .footer3 {
+        position: absolute;
+        top: 5px;
+        left: 600px;
+    }
+
+    .footer4 {
+        position: absolute;
+        top: 5px;
+        left: 700px;
+    }
+
+    .footer5 {
+        position: absolute;
+        top: 5px;
+        left: 800px;
+    }
 
     body {
         font-family: "Times New Roman", Times, serif;
@@ -91,14 +125,36 @@
             </div>
         </div>
     </section>
-    <figure class="image is-1920x306 has-text-centered" style="position: absolute">
+    <figure class="image is-1920x306 has-text-centered" style="position: relative">
         <img src="https://images-ext-1.discordapp.net/external/FfrVrZtXg0Z_6lWGhSan-BG_zUXVu4DoJXFbxN2Uh5Q/https/lh3.googleusercontent.com/pw/AM-JKLUR3-FjCppm_GrTc8z7uoBbmkEBna_blYBacdqEwPmRIR17rzpjPmbImq4Ayp4AhWIMpctlw4FAdlrQXOxzrHprv0pgYnUWiYdF-LSpDoeCBFDMEAa-DHZraJ5GHU0T2Qw9aa57D-NvPLwzwmQKPA%3Dw1920-h306-no" alt="footer">
-        <figure class="image is-64x64 is-inline-block"  style="position: relative; display: block; margin-left: auto; margin-right: auto;">
-            <img src="https://lh3.googleusercontent.com/pw/AM-JKLUX4arN90ICXaWAQ7cHc-61JhL8FBRLEFq6gOezCADv18pQi26W-RX1-A86zv7VeZ5efqHh_akcli0ASfT_vENCafIIlqZcimp-Ietrulb82JzqEVhZmW-6ca2aA70Zz7KV_P_UAApRH1ZdY3ZHpw=w175-h174-no" alt="facebook_icon">
-            <img src="https://lh3.googleusercontent.com/pw/AM-JKLXLSGBNryTv-kyav4qrTW_srto0Hedav7lTYt8OgsU_PyJ0TC4zs8K-jdrPO6PFQZmE_jJebPZqgP7bpmyhUTkYlUdkQC8hpamnbg9jA0CkXWuBYKZRBSQZcE6PmQgTQLQmozxzUKYpChKOCfEWcg=w175-h174-no" alt="insta_icon">
-            <img src="https://lh3.googleusercontent.com/pw/AM-JKLXtk8QRy6taNzTe4wFTuYf0G5OPrUBmDDFeSJfWOmidtx98STNNcDZR7jihz2iUvUjUYEts_XzTfRJcsPjNBlBgHDvr40rukG5TYpuG3S17rVQKzlVXiwhW7FJH4FjTB1KP8h-fe_FAWwz6AQUB5A=w175-h174-no" alt="twitter_icon">
-            <img src="https://lh3.googleusercontent.com/pw/AM-JKLUzv5u5nFqfoHMiavW7xzMZHQnxuNSFrnH9YehSVF1LaGgbH3NDPACtyiSZhFxbOWgGgwxNOjTi98outozgC8A48RZI7XsgBWS8uZJVr9Tcar2RBvDQ_gw5AKs76CmWkOctQde05t648q4NIUYoSg=w175-h174-no" alt="yt_icon">
-            <img src="https://lh3.googleusercontent.com/pw/AM-JKLWxPqfAMd2-L57SRS6FvUhRSXRWn2Dp35fsycWr6ympWTmXKU1_SYiTKNos6KNTXKUGEnzrJlXfF1r4eL-rkKVC2J1M8chEBWUTnbSBxI7W0mc6r8wud3rZWbkRrzpzZU_GaoH0wKyIMmon_eIirQ=w175-h174-no" alt="in_icon">
+        <figure class="is-inline-block">
+            <div class="row">
+                <a href="https://www.facebook.com/">
+                    <div class="column1 image is-64x64 footer1">
+                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLUX4arN90ICXaWAQ7cHc-61JhL8FBRLEFq6gOezCADv18pQi26W-RX1-A86zv7VeZ5efqHh_akcli0ASfT_vENCafIIlqZcimp-Ietrulb82JzqEVhZmW-6ca2aA70Zz7KV_P_UAApRH1ZdY3ZHpw=w175-h174-no" alt="facebook_icon">
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/?hl=en">
+                    <div class="column1 image is-64x64 footer2">
+                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLXLSGBNryTv-kyav4qrTW_srto0Hedav7lTYt8OgsU_PyJ0TC4zs8K-jdrPO6PFQZmE_jJebPZqgP7bpmyhUTkYlUdkQC8hpamnbg9jA0CkXWuBYKZRBSQZcE6PmQgTQLQmozxzUKYpChKOCfEWcg=w175-h174-no" alt="insta_icon">
+                    </div>
+                </a>
+                <a href="https://twitter.com/?lang=en">
+                    <div class="column1 image is-64x64 footer3">
+                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLXtk8QRy6taNzTe4wFTuYf0G5OPrUBmDDFeSJfWOmidtx98STNNcDZR7jihz2iUvUjUYEts_XzTfRJcsPjNBlBgHDvr40rukG5TYpuG3S17rVQKzlVXiwhW7FJH4FjTB1KP8h-fe_FAWwz6AQUB5A=w175-h174-no" alt="twitter_icon">
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/">
+                    <div class="column1 image is-64x64 footer4">
+                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLUzv5u5nFqfoHMiavW7xzMZHQnxuNSFrnH9YehSVF1LaGgbH3NDPACtyiSZhFxbOWgGgwxNOjTi98outozgC8A48RZI7XsgBWS8uZJVr9Tcar2RBvDQ_gw5AKs76CmWkOctQde05t648q4NIUYoSg=w175-h174-no" alt="yt_icon">
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/">
+                    <div class="column1 image is-64x64 footer5">
+                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLWxPqfAMd2-L57SRS6FvUhRSXRWn2Dp35fsycWr6ympWTmXKU1_SYiTKNos6KNTXKUGEnzrJlXfF1r4eL-rkKVC2J1M8chEBWUTnbSBxI7W0mc6r8wud3rZWbkRrzpzZU_GaoH0wKyIMmon_eIirQ=w175-h174-no" alt="in_icon">
+                    </div>
+                </a>
+            </div>
         </figure>
     </figure>
 </body>

@@ -16,6 +16,40 @@ bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 
 
+# ERROR PAGE VIEWS Reference from CSC2021
+@app.errorhandler(400)
+def bad_request(error):
+    # Adding page 500 error to the security logs
+    return render_template('400.html'), 400
+
+
+@app.errorhandler(403)
+def forbidden(error):
+    # Adding page 500 error to the security logs
+    return render_template('403.html'), 403
+
+
+@app.errorhandler(404)
+def not_found(error):
+    # Adding page 500 error to the security logs
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    # Adding page 500 error to the security logs
+
+    return render_template('500.html'), 500
+
+
+@app.errorhandler(503)
+def service_unavailable(error):
+    # Adding page 500 error to the security logs
+
+    return render_template('503.html'), 503
+
+
+
 
 @app.route("/")
 def home():
@@ -58,6 +92,10 @@ def admin():
 
 
 
+
+@app.route("/register")
+def register():
+    return render_template('register.html')
 
 
 if __name__ == '__main__':
