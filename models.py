@@ -142,6 +142,14 @@ class Security(UserMixin, db.Model):
         self.date = date
 
 
+def new_security_event(login, email):  # Creates security event to make logging more compact
+    return Security(
+        login=login,
+        email=email,
+        date=datetime.now()
+        )
+
+
 class SecurityError(UserMixin, db.Model):
     __tablename__ = 'security_page_error'
 
@@ -153,6 +161,12 @@ class SecurityError(UserMixin, db.Model):
         self.error = error
         self.date = date
 
+
+def new_security_error(error):  # Creates security error to make logging more compact
+    return SecurityError(
+        error=error,
+        date=datetime.now()
+    )
 
 class Donation(UserMixin, db.Model):
     __tablename__ = 'Donations'

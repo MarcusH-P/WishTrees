@@ -1,9 +1,11 @@
 import socket
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_bootstrap import Bootstrap
 from datetime import datetime
+from functools import wraps
+
 
 # CONFIG
 app = Flask(__name__)
@@ -17,54 +19,49 @@ bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 
 
+# REQUIRES_ROLES Reference from CSC2021
+def requires_roles(*roles):
+    def wrapper(f):
+        @wraps(f)
+        def wrapped(*args, **kwargs):
+            if current_user.role not in roles:
+                # Redirect the user to an unauthorised notice!
+                return redirect(url_for('403'))
+            return f(*args, **kwargs)
+        return wrapped
+    return wrapper
+
+
 # ERROR PAGE VIEWS Reference from CSC2021
 @app.errorhandler(400)
 def bad_request(error):
-    error = SecurityError(  # Adds error event to security_page_error
-        error='400',
-        date=datetime.now())
-    db.session.add(error)
-    db.session.commit()
+    db_add_commit(new_security_error('400'))
     return render_template('400.html'), 400
 
 
 @app.errorhandler(403)
 def forbidden(error):
-    error = SecurityError(  # Adds error event to security_page_error
-        error='403',
-        date=datetime.now())
-    db.session.add(error)
-    db.session.commit()
+    db_add_commit(new_security_error('403'))
+    if current_user:
+        new_security_event('UNAUTHORISED ACCESS ATTEMPT', current_user.email)
     return render_template('403.html'), 403
 
 
 @app.errorhandler(404)
 def not_found(error):
-    error = SecurityError(  # Adds error event to security_page_error
-        error='404',
-        date=datetime.now())
-    db.session.add(error)
-    db.session.commit()
+    db_add_commit(new_security_error('404'))
     return render_template('404.html'), 404
 
 
 @app.errorhandler(500)
 def internal_error(error):
-    error = SecurityError(  # Adds error event to security_page_error
-        error='500',
-        date=datetime.now())
-    db.session.add(error)
-    db.session.commit()
+    db_add_commit(new_security_error('500'))
     return render_template('500.html'), 500
 
 
 @app.errorhandler(503)
 def service_unavailable(error):
-    error = SecurityError(  # Adds error event to security_page_error
-        error='503',
-        date=datetime.now())
-    db.session.add(error)
-    db.session.commit()
+    db_add_commit(new_security_error('503'))
     return render_template('503.html'), 503
 
 
@@ -98,6 +95,11 @@ def admin():
     return render_template('admin.html')
 
 
+def db_add_commit(an_object):  # Makes commit to db more compact
+    db.session.add(an_object)
+    db.session.commit()
+
+
 if __name__ == '__main__':
     my_host = "127.0.0.1"
     free_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -109,7 +111,7 @@ if __name__ == '__main__':
     login_manager.login_view = 'users.login'
     login_manager.init_app(app)
 
-    from models import User, SecurityError
+    from models import User, new_security_error, new_security_event
 
 
     @login_manager.user_loader
