@@ -142,6 +142,7 @@ class Security(UserMixin, db.Model):
         self.date = date
 
 
+
 class SecurityError(UserMixin, db.Model):
     __tablename__ = 'security_page_error'
 

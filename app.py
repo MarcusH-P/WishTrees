@@ -16,6 +16,18 @@ app.config['SECRET_KEY'] = 'LongAndRandomSecretKey'
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 
+# REQUIRES_ROLES Reference from CSC2021
+def requires_roles(*roles):
+    def wrapper(f):
+        @wraps(f)
+        def wrapped(*args, **kwargs):
+            if current_user.role not in roles:
+
+                # Redirect the user to an unauthorised notice!
+                return render_template('403.html')
+            return f(*args, **kwargs)
+        return wrapped
+    return wrapper
 
 # ERROR PAGE VIEWS Reference from CSC2021
 @app.errorhandler(400)
