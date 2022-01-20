@@ -203,4 +203,4 @@ def billing():
         return render_template('home.html')
 
     # if request method is GET or form not valid re-render signup page
-    return render_template('donate.html', form=form)
+    return render_template('billing.html', form=form)
