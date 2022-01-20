@@ -33,7 +33,7 @@ class User(UserMixin, db.Model):
     def get_id(self):
         return self.user_key
 
-    def __init__(self, email, firstname, lastname, phone, password, role, points, otp_secret):
+    def __init__(self, email, firstname, lastname, phone, password, role, otp_secret):
         self.email = email
         self.firstname = firstname
         self.lastname = lastname
@@ -43,11 +43,10 @@ class User(UserMixin, db.Model):
         self.registered_on = datetime.now()
         self.last_logged_in = None
         self.current_logged_in = None
-        self.otp_secret = otp_secret
         if self.otp_secret is None:
             self.otp_secret = base64.b32encode(os.urandom(10)).decode('utf-8')  # Creates One Time Password secret
         self.otp_setup = None
-        self.points = points
+
 
     def get_uri(self):  # Generates Uri for 2FA QR Code
         return 'otpauth://totp/WishTrees:{0}?secret={1}&issuer=WishTrees' \
@@ -155,6 +154,18 @@ class SecurityError(UserMixin, db.Model):
         self.date = date
 
 
+class Donation(UserMixin, db.Model):
+    __tablename__ = 'Donations'
+
+    donation_id = db.Column(db.Integer, primary_key=True)
+    user_key = db.Column(db.String(100), nullable=False)
+    donation_amount = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, user_key, donation_amount):
+        self.user_key = user_key
+        self.donation_amount = donation_amount
+
+
 def init_db():
     db.drop_all()
     db.create_all()
@@ -164,7 +175,6 @@ def init_db():
                  lastname='Jones',
                  role='admin',
                  otp_secret='AWNNDREYD7E4I2NA',
-                 phone=None,
-                 points=0)
+                 phone=None)
     db.session.add(admin)
     db.session.commit()
