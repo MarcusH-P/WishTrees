@@ -2,7 +2,7 @@ import pyotp
 import pyqrcode
 from io import BytesIO
 from flask import render_template, flash, redirect, url_for, request, session, Blueprint
-from user.forms import RegisterForm, LoginForm
+from user.forms import RegisterForm, LoginForm, DonateForm
 from models import User, Security
 from app import db
 from werkzeug.security import check_password_hash
@@ -150,3 +150,19 @@ def profile():
                            lastname=current_user.lastname,
                            phone=current_user.phone,
                            points=current_user.points)
+
+@users_blueprint.route('/donate', methods=['GET', 'POST'])
+def donate():
+    # create signup form object
+    form = DonateForm()
+
+    # create a new user with the form data
+    new_donation = Donation(donation=form.donation_amount.data)
+
+    # add the new user to the database
+    db.session.add(new_donation)
+    db.session.commit()
+
+    # sends user to 2fa
+    session['email'] = new_donation.email
+    return render_template('login.html')
