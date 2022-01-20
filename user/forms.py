@@ -41,7 +41,7 @@ class LoginForm(FlaskForm):
 
 class DonateForm(FlaskForm):
 
-    donation = StringField(validators=[InputRequired(), Email()])
+    donation = IntegerField(validators=[InputRequired()])
     cardnum = StringField(validators=[InputRequired(), Length(min=15, max=16, message='Card number must be 16 digits in length')])
 
     # TODO add CVC to
