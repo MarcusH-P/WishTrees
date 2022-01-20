@@ -157,7 +157,7 @@ def donate():
     form = DonateForm()
 
     # create a new user with the form data
-    new_donation = Donation(donation=form.donation.data)
+    new_donation = Donation(donation=form.donation_amount.data)
 
     # add the new user to the database
     db.session.add(new_donation)
