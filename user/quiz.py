@@ -14,7 +14,6 @@ wishtrees_questions = {
 }
 
 questions = copy.deepcopy(wishtrees_questions)
-#  questions = wishtrees_questions
 
 
 # This function is for shuffling the dictionary elements.
