@@ -140,3 +140,13 @@ def logout():
     db.session.add(new_logout)
     db.session.commit()
     return redirect(url_for('index'))
+
+
+@users_blueprint.route("/profile")
+def profile():
+    return render_template('profile.html',
+                           email=current_user.email,
+                           firstname=current_user.firstname,
+                           lastname=current_user.lastname,
+                           phone=current_user.phone,
+                           points=current_user.points)
