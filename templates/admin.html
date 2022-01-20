@@ -2,7 +2,145 @@
 
 {% block content %}
 
-<div class="column is-6 is-offset-3">
-    <h3 class="title">Admin</h3>
-</div>
+    <h3 class="title is-3">WishTrees Administration
+    </h3>
+    <div class="column is-10 is-offset-1">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <h4 class="title is-4">All users</h4>
+        <div class="box">
+            {% if all_users %}
+                <div class="field">
+                    <table class="table">
+                        <tr>
+                            <th>Email</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Phone Number</th>
+                            <th>Role</th>
+                            <th>User Key</th>
+                            <th>Points</th>
+                        </tr>
+                        {% for user in all_users %}
+                            <tr>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.firstname }}</td>
+                                <td>{{ user.lastname }}</td>
+                                <td>{{ user.phone }}</td>
+                                <td>{{ user.role }}</td>
+                                <td>{{ user.user_key }}</td>
+                                <td>{{ user.points }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+            <form method="POST" action="/view_users">
+                <div>
+                    <button class="button is-info is-centered">View All Users</button>
+                </div>
+            </form>
+        </div>
+        <h4 class="title is-4">All donations</h4>
+        <div class="box">
+            {% if all_donations %}
+                <div class="field">
+                    <table class="table">
+                        <tr>
+                            <th>Donation ID</th>
+                            <th>User Key</th>
+                            <th>Donation Amount</th>
+                        </tr>
+                        {% for dono in all_donations %}
+                            <tr>
+                                <td>{{ dono.donation_id }}</td>
+                                <td>{{ dono.user_key }}</td>
+                                <td>{{ dono.donation_amount }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+            <form method="POST" action="/view_donations">
+                <div>
+                    <button class="button is-info is-centered">View All Donations</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="column is-8 is-offset-2">
+        <h4 class="title is-4">Delete user</h4>
+        <div class="box">
+            <form method="POST" action="/delete_user">
+                <div class="columns is-multiline is-centered">
+                    <div class="column is-one-sixth">
+                        <input class="input" type="string" name="email" id="email" placeholder="Enter email" required>
+                    </div>
+                </div>
+                <div>
+                    <button class="button is-info is-centered">Delete user</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <h4 class="title is-4">Security Events</h4>
+        <div class="box">
+            {% if all_events %}
+                <div class="field">
+                    <table class="table">
+                        <tr>
+                            <th>Event ID</th>
+                            <th>login</th>
+                            <th>email</th>
+                            <th>date</th>
+                        </tr>
+                        {% for event in all_events %}
+                            <tr>
+                                <td>{{ event.event_id }}</td>
+                                <td>{{ event.login }}</td>
+                                <td>{{ event.email }}</td>
+                                <td>{{ event.date }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+            <form method="POST" action="/view_security">
+                <div>
+                    <button class="button is-info is-centered">View Security Events</button>
+                </div>
+            </form>
+        </div>
+        <h4 class="title is-4">Security Errors</h4>
+        <div class="box">
+            {% if all_errors %}
+                <div class="field">
+                    <table class="table">
+                        <tr>
+                            <th>Error ID</th>
+                            <th>Error</th>
+                            <th>date</th>
+                        </tr>
+                        {% for error in all_errors %}
+                            <tr>
+                                <td>{{ error.error_id }}</td>
+                                <td>{{ error.error }}</td>
+                                <td>{{ error.date }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+            <form method="POST" action="/view_security_errors">
+                <div>
+                    <button class="button is-info is-centered">View Security Errors</button>
+                </div>
+            </form>
+        </div>
 {% endblock %}

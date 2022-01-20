@@ -1,10 +1,10 @@
-import socket
-from flask import Flask, render_template, redirect,url_for
+import socket, copy
+from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
 from flask_bootstrap import Bootstrap
-from datetime import datetime
 from functools import wraps
+
 
 
 # CONFIG
@@ -120,8 +120,11 @@ if __name__ == '__main__':
 
     # import blueprints
     from user.views import users_blueprint
+    from admin.views import admin_blueprint
+    from user.quiz import quiz_blueprint
 
     # register blueprints with app
     app.register_blueprint(users_blueprint)
-
+    app.register_blueprint(quiz_blueprint)
+    app.register_blueprint(admin_blueprint)
     app.run(host=my_host, port=free_port, debug=True)

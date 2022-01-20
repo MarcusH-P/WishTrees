@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title" style=" color: #c993dc;">QUIZ 1 - WishTrees
+<h1 class="title" style=" color: #c993dc; text-align: left; font-size: xx-large" > WishTrees Quiz
   </h1>
+<form action='/quiz' method='POST' style =" text-align:left; font-size: large" >
+    <ol>
+        {% for i in q %}
+            <li>-  <u>{{i}}</u> ?</li>
+            {% for j in o[i] %}
+                <input type='radio' value='{{j}}' name='{{i}}' />{{j}}
+            {% endfor %}
+        {% endfor %}
+    </ol>
+    <input type="submit" value="submit" />
+</form>
+
 {% endblock %}
