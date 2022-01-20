@@ -33,7 +33,7 @@ class User(UserMixin, db.Model):
     def get_id(self):
         return self.user_key
 
-    def __init__(self, email, firstname, lastname, phone, password, role, otp_secret):
+    def __init__(self, email, firstname, lastname, phone, password, role):
         self.email = email
         self.firstname = firstname
         self.lastname = lastname

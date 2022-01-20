@@ -3,7 +3,7 @@ import pyqrcode
 from io import BytesIO
 from flask import render_template, flash, redirect, url_for, request, session, Blueprint
 from user.forms import RegisterForm, LoginForm, DonateForm
-from models import User, Security
+from models import User, Security, Donation
 from app import db
 from werkzeug.security import check_password_hash
 from flask_login import login_user, current_user, logout_user, login_required
@@ -151,18 +151,26 @@ def profile():
                            phone=current_user.phone,
                            points=current_user.points)
 
+
 @users_blueprint.route('/donate', methods=['GET', 'POST'])
 def donate():
     # create signup form object
     form = DonateForm()
 
-    # create a new user with the form data
-    new_donation = Donation(donation=form.donation_amount.data)
+    # if request method is POST or form is valid
+    if form.validate_on_submit():
 
-    # add the new user to the database
-    db.session.add(new_donation)
-    db.session.commit()
+        # create a new user with the form data
+        new_donation = Donation(
+            user_key=current_user.user_key,
+            donation_amount=form.donation.data)
 
-    # sends user to 2fa
-    session['email'] = new_donation.email
-    return render_template('login.html')
+        # add the new user to the database
+        db.session.add(new_donation)
+        db.session.commit()
+
+        # session['email'] = new_donation.email
+        return render_template('home.html')
+
+    # if request method is GET or form not valid re-render signup page
+    return render_template('donate.html', form=form)
