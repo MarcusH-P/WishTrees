@@ -160,12 +160,12 @@ def donate():
     # if request method is POST or form is valid
     if form.validate_on_submit():
 
-        # create a new user with the form data
+        # create a new donation with the form data
         new_donation = Donation(
             user_key=current_user.user_key,
             donation_amount=form.donation.data)
 
-        # add the new user to the database
+        # add the new donation to the database
         db.session.add(new_donation)
         db.session.commit()
 
@@ -185,7 +185,7 @@ def billing():
     # if request method is POST or form is valid
     if form.validate_on_submit():
 
-        # create a new user with the form data
+        # create a new order with the form data
         new_order = Order(
             product_number="Product number",
             user_key=current_user.user_key,
