@@ -91,10 +91,10 @@
                            <a href="{{ url_for('users.register')}}" class="navbar-item"  style=" color: #c993dc;">
                                Register
                            </a>
-                           <a href="{{ url_for('profile')}}" class="navbar-item"  style=" color: #c993dc;">
+                           <a href="{{ url_for('users.profile')}}" class="navbar-item"  style=" color: #c993dc;">
                                Profile
                            </a>
-                           <a href="{{ url_for('donate')}}" class="navbar-item"  style=" color: #c993dc;">
+                           <a href="{{ url_for('users.donate')}}" class="navbar-item"  style=" color: #c993dc;">
                                DONATE
                            </a>
                            <a href="{{ url_for('admin')}}" class="navbar-item" style=" color: #c993dc;">
@@ -112,6 +112,9 @@
                            <a href={{url_for('about')}} class="navbar-item" style=" color: #c993dc;">
                                About
                            </a>
+                           <a href={{url_for('users.logout')}} class="navbar-item" style=" color: #c993dc;">
+                               logout
+                           </a>
                        </div>
                     </div>
                 </div>
@@ -126,7 +129,9 @@
         </div>
     </section>
     <figure class="image is-1920x306 has-text-centered" style="position: relative">
+
         <img src="https://lh3.googleusercontent.com/pw/AM-JKLWlj2EzbTQX6fNq7pn8wRJwfWyUlrccJGZKfjiq6XN4Gjh5hdMuv76ViMF3cK5gwc8XLndmS20ON4YSuPvomcNEnx_60Cnaj0bSeRcggXbUZaki9PQ1bBytl9SCgj39EagsM5ZWYxKxYDrWjAa_rg=w1920-h306-no" alt="footer">
+
         <figure class="is-inline-block">
             <div class="row">
                 <a href="https://www.facebook.com/">

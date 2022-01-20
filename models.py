@@ -28,6 +28,7 @@ class User(UserMixin, db.Model):
     phone = db.Column(db.String(100), nullable=True)
     role = db.Column(db.String(100), nullable=False, default='user')
     user_key = db.Column(db.Integer, nullable=False, primary_key=True)
+    points = db.Column(db.Integer, nullable=False, default=int(0))
 
     def get_id(self):
         return self.user_key
@@ -45,6 +46,7 @@ class User(UserMixin, db.Model):
         if self.otp_secret is None:
             self.otp_secret = base64.b32encode(os.urandom(10)).decode('utf-8')  # Creates One Time Password secret
         self.otp_setup = None
+
 
     def get_uri(self):  # Generates Uri for 2FA QR Code
         return 'otpauth://totp/WishTrees:{0}?secret={1}&issuer=WishTrees' \
@@ -111,11 +113,19 @@ class Quiz(UserMixin, db.Model):
     quiz_key = db.Column(db.String(100), nullable=False, primary_key=True)
     question_number = db.Column(db.String(100), nullable=False)
     question = db.Column(db.String(100), nullable=False)
+    answer = db.Column(db.String(100), nullable=False)
+    answer2 = db.Column(db.String(100), nullable=False)
+    answer3 = db.Column(db.String(100), nullable=False)
+    answer4 = db.Column(db.String(100), nullable=False)
 
-    def __init__(self, quiz_key, question_number, question):
+    def __init__(self, quiz_key, question_number, question, answer, answer2, answer3, answer4):
         self.quiz_key = quiz_key
         self.question_number = question_number
         self.question = question
+        self.answer = answer
+        self.answer2 = answer2
+        self.answer3 = answer3
+        self.answer4 = answer4
 
 
 class Security(UserMixin, db.Model):
@@ -132,16 +142,42 @@ class Security(UserMixin, db.Model):
         self.date = date
 
 
+def new_security_event(login, email):  # Creates security event to make logging more compact
+    return Security(
+        login=login,
+        email=email,
+        date=datetime.now()
+        )
+
+
 class SecurityError(UserMixin, db.Model):
     __tablename__ = 'security_page_error'
 
     error_id = db.Column(db.Integer, primary_key=True)
-    error = db.Column(db.Boolean, nullable=False)
+    error = db.Column(db.String(100), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
 
     def __init__(self, error, date):
         self.error = error
         self.date = date
+
+
+def new_security_error(error):  # Creates security error to make logging more compact
+    return SecurityError(
+        error=error,
+        date=datetime.now()
+    )
+
+class Donation(UserMixin, db.Model):
+    __tablename__ = 'Donations'
+
+    donation_id = db.Column(db.Integer, primary_key=True)
+    user_key = db.Column(db.String(100), nullable=False)
+    donation_amount = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, user_key, donation_amount):
+        self.user_key = user_key
+        self.donation_amount = donation_amount
 
 
 def init_db():
