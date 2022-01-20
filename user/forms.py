@@ -19,7 +19,7 @@ class RegisterForm(FlaskForm):
     lastname = StringField(validators=[InputRequired(), character_check])
 
     # MAYBE INCLUDE PREFIX FOR INTERNATIONAL NUMBERS? (Can be done jankily very easily)
-    phone = StringField(validators=[Length(min=10, max=11, message='This is not a valid phone number')])
+    phone = StringField(validators=[Length(min=0, max=12, message='This is not a valid phone number')])
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20, message='Password must be between 8 and 20 characters in length.')])
     confirm_password = PasswordField(validators=[InputRequired(), EqualTo('password', message='Both password fields must be equal!')])
     submit = SubmitField()
