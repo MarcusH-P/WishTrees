@@ -7,7 +7,7 @@ wishtrees_questions = {
     'How many trees have WishTrees help plant' :['1 million','250,000','12 million','700,000'],
     'When was WishTrees founded' :['2012','2020','2015','2008'],
     'countries_planted' :['42 countries','3 countries','18 countries','72 countries'],
-    'help' :['All of the above','Donate to charities','Buy our merch','Complete our quizzes']`
+    'help' :['All of the above','Donate to charities','Buy our merch','Complete our quizzes']
 }
 
 def quiz():
