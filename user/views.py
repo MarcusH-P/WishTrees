@@ -3,7 +3,7 @@ import pyqrcode
 from io import BytesIO
 from flask import render_template, flash, redirect, url_for, request, session, Blueprint
 from user.forms import RegisterForm, LoginForm, DonateForm
-from models import User, Security
+from models import User, Security, Donation
 from app import db
 from werkzeug.security import check_password_hash
 from flask_login import login_user, current_user, logout_user, login_required
@@ -151,13 +151,17 @@ def profile():
                            phone=current_user.phone,
                            points=current_user.points)
 
+
 @users_blueprint.route('/donate', methods=['GET', 'POST'])
 def donate():
     # create signup form object
     form = DonateForm()
 
     # create a new user with the form data
-    new_donation = Donation(donation=form.donation_amount.data)
+
+    new_donation = Donation(
+        user_key=current_user.user_key,
+        donation_amount=form.donation.data)
 
     # add the new user to the database
     db.session.add(new_donation)
