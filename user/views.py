@@ -157,16 +157,20 @@ def donate():
     # create signup form object
     form = DonateForm()
 
-    # create a new user with the form data
+    # if request method is POST or form is valid
+    if form.validate_on_submit():
 
-    new_donation = Donation(
-        user_key=current_user.user_key,
-        donation_amount=form.donation.data)
+        # create a new user with the form data
+        new_donation = Donation(
+            user_key=current_user.user_key,
+            donation_amount=form.donation.data)
 
-    # add the new user to the database
-    db.session.add(new_donation)
-    db.session.commit()
+        # add the new user to the database
+        db.session.add(new_donation)
+        db.session.commit()
 
-    # sends user to 2fa
-    session['email'] = new_donation.email
-    return render_template('login.html')
+        # session['email'] = new_donation.email
+        return render_template('home.html')
+
+    # if request method is GET or form not valid re-render signup page
+    return render_template('donate.html', form=form)
