@@ -2,8 +2,8 @@ import pyotp
 import pyqrcode
 from io import BytesIO
 from flask import render_template, flash, redirect, url_for, request, session, Blueprint
-from user.forms import RegisterForm, LoginForm, DonateForm
-from models import User, Security, Donation
+from user.forms import RegisterForm, LoginForm, DonateForm, BillingForm
+from models import User, Security, Donation, Order
 from app import db
 from werkzeug.security import check_password_hash
 from flask_login import login_user, current_user, logout_user, login_required
@@ -167,6 +167,36 @@ def donate():
 
         # add the new user to the database
         db.session.add(new_donation)
+        db.session.commit()
+
+        # session['email'] = new_donation.email
+        return render_template('home.html')
+
+    # if request method is GET or form not valid re-render signup page
+    return render_template('donate.html', form=form)
+
+
+@users_blueprint.route('/billing', methods=['GET', 'POST'])
+def billing():
+
+    # create signup form object
+    form = BillingForm()
+
+    # if request method is POST or form is valid
+    if form.validate_on_submit():
+
+        # create a new user with the form data
+        new_order = Order(
+            product_number="Product number",
+            user_key=current_user.user_key,
+            address_line_1=form.address_1.data,
+            address_line_2=form.address_2.data,
+            city_town=form.city_town.data,
+            county=form.county.data,
+            date=datetime.now())
+
+        # add the new user to the database
+        db.session.add(new_order)
         db.session.commit()
 
         # session['email'] = new_donation.email
