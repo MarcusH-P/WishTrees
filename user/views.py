@@ -128,7 +128,8 @@ def qrcode():
 @login_required
 def logout():
     db_add_commit(new_security_event('logout', current_user.email))
-    return redirect(url_for('index'))
+    logout_user()
+    return redirect(url_for('home'))
 
 
 @users_blueprint.route("/profile")
