@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Blueprint, request
-import random, copy
+import random
+import copy
 
 quiz_blueprint = Blueprint('quiz', __name__, template_folder='templates')
 
