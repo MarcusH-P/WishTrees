@@ -8,11 +8,8 @@ from app import db, db_add_commit
 from werkzeug.security import check_password_hash
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
-
 # CONFIG
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
-
-
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     # create signup form object
@@ -85,7 +82,7 @@ def login():
             user.current_logged_in = datetime.now()
             user.otp_setup = True
 
-            db.session.add(new_security_event('new login', current_user.email))
+            db.session.add(new_security_event('login', current_user.email))
             db.session.add(user)
             db.session.commit()
 
