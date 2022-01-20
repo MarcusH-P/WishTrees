@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-5 is-offset-4">
+    <h3 class="title" style="color: #c993dc">Billing</h3>
+    <div class="box" style="background-color: #c993dc">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+        <div class="notification is-danger">
+            {{ messages[0] }}. Go to <a href="{{ url_for('users.login') }}">login page</a>.
+        </div>
+
+        {% endif %}
+        {% endwith %}
+        <form method="POST">
+
+            <div class="field">
+                {{ form.csrf_token() }}
+                <div class="control">
+                    {{ form.address_1(class="input", placeholder="Address Line 1") }}
+                    {%  for error in form.address_1.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    {{ form.address_2(class="input", placeholder="Address Line 2") }}
+                    {% for error in form.address_2.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    {{ form.city_town(class="input", placeholder="City/Town") }}
+                    {% for error in form.city_town.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    {{ form.county(class="input", placeholder="County") }}
+                    {% for error in form.county.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    {{ form.cardnum(class="input", placeholder="Card Number") }}
+                    {% for error in form.cardnum.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div>
+                {{ form.submit(class="button is-info is-centered", style="background-color: #000732") }}
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

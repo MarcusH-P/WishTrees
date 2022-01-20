@@ -20,7 +20,6 @@ class User(UserMixin, db.Model):
     registered_on = db.Column(db.DateTime, nullable=False)
     last_logged_in = db.Column(db.DateTime, nullable=True)
     current_logged_in = db.Column(db.DateTime, nullable=True)
-    otp_setup = db.Column(db.Boolean, nullable=True)
 
     # User information
     firstname = db.Column(db.String(100), nullable=False)
@@ -45,7 +44,6 @@ class User(UserMixin, db.Model):
         self.current_logged_in = None
         if self.otp_secret is None:
             self.otp_secret = base64.b32encode(os.urandom(10)).decode('utf-8')  # Creates One Time Password secret
-        self.otp_setup = None
 
 
     def get_uri(self):  # Generates Uri for 2FA QR Code
@@ -63,12 +61,14 @@ class Product(UserMixin, db.Model):
     product_type = db.Column(db.String(100), nullable=False)
     product_colour = db.Column(db.String(100), nullable=False)
     charity_name = db.Column(db.String(100), nullable=False)
+    price = db.Column(db.String(100), nullable=False)
 
-    def __init__(self, product_number, product_type, product_colour, charity_name):
+    def __init__(self, product_number, product_type, product_colour, charity_name, price):
         self.product_number = product_number
         self.product_type = product_type
         self.product_colour = product_colour
         self.charity_name = charity_name
+        self.price = price
 
 
 class Order(UserMixin, db.Model):
@@ -142,6 +142,14 @@ class Security(UserMixin, db.Model):
         self.date = date
 
 
+def new_security_event(login, email):  # Creates security event to make logging more compact
+    return Security(
+        login=login,
+        email=email,
+        date=datetime.now()
+        )
+
+
 class SecurityError(UserMixin, db.Model):
     __tablename__ = 'security_page_error'
 
@@ -152,6 +160,13 @@ class SecurityError(UserMixin, db.Model):
     def __init__(self, error, date):
         self.error = error
         self.date = date
+
+
+def new_security_error(error):  # Creates security error to make logging more compact
+    return SecurityError(
+        error=error,
+        date=datetime.now()
+    )
 
 
 class Donation(UserMixin, db.Model):
@@ -174,7 +189,6 @@ def init_db():
                  firstname='Alice',
                  lastname='Jones',
                  role='admin',
-                 otp_secret='AWNNDREYD7E4I2NA',
                  phone=None)
     db.session.add(admin)
     db.session.commit()

@@ -3,7 +3,10 @@ import pyqrcode
 from io import BytesIO
 from flask import render_template, flash, redirect, url_for, request, session, Blueprint
 from user.forms import RegisterForm, LoginForm, DonateForm
-from models import User, Security, Donation
+from models import User, Security, Donation, new_security_event, new_security_error
+from app import db, db_add_commit
+from user.forms import RegisterForm, LoginForm, DonateForm, BillingForm
+from models import User, Security, Donation, Order
 from app import db
 from werkzeug.security import check_password_hash
 from flask_login import login_user, current_user, logout_user, login_required
@@ -38,6 +41,7 @@ def register():
 
         # add the new user to the database
         db.session.add(new_user)
+        db.session.add(new_security_event('user registered', form.email.data))
         db.session.commit()
 
         # sends user to 2fa
@@ -72,12 +76,7 @@ def login():
             elif logger >= 3:
                 flash('Number of incorrect logins exceeded')
 
-            failed_login = Security(  # Adds failed login event to security_login_logout
-                login='failed login',
-                email=form.email.data,
-                date=datetime.now())
-            db.session.add(failed_login)
-            db.session.commit()
+            db_add_commit(new_security_event('failed login', form.email.data))
             return render_template('login.html', form=form)
 
         if pyotp.TOTP(user.otp_secret).verify(form.otp.data):
@@ -90,11 +89,7 @@ def login():
             user.current_logged_in = datetime.now()
             user.otp_setup = True
 
-            new_login = Security(  # Adds login event to security_login_logout
-                            login='login',
-                            email=form.email.data,
-                            date=datetime.now())
-            db.session.add(new_login)
+            db.session.add(new_security_event('login', current_user.email))
             db.session.add(user)
             db.session.commit()
 
@@ -132,14 +127,9 @@ def qrcode():
 @users_blueprint.route('/logout')
 @login_required
 def logout():
-    new_logout = Security(  # Adds login event to security_login_logout
-        login='logout',
-        email=current_user.email,
-        date=datetime.now())
+    db_add_commit(new_security_event('logout', current_user.email))
     logout_user()
-    db.session.add(new_logout)
-    db.session.commit()
-    return redirect(url_for('index'))
+    return redirect(url_for('home'))
 
 
 @users_blueprint.route("/profile")
@@ -166,7 +156,36 @@ def donate():
             donation_amount=form.donation.data)
 
         # add the new user to the database
-        db.session.add(new_donation)
+        db_add_commit(new_donation)
+
+        # TODO session['email'] = new_donation.email
+        return render_template('home.html')
+
+    # if request method is GET or form not valid re-render signup page
+    return render_template('donate.html', form=form)
+
+
+@users_blueprint.route('/billing', methods=['GET', 'POST'])
+def billing():
+
+    # create signup form object
+    form = BillingForm()
+
+    # if request method is POST or form is valid
+    if form.validate_on_submit():
+
+        # create a new user with the form data
+        new_order = Order(
+            product_number="Product number",
+            user_key=current_user.user_key,
+            address_line_1=form.address_1.data,
+            address_line_2=form.address_2.data,
+            city_town=form.city_town.data,
+            county=form.county.data,
+            date=datetime.now())
+
+        # add the new user to the database
+        db.session.add(new_order)
         db.session.commit()
 
         # session['email'] = new_donation.email

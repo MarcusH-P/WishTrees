@@ -42,7 +42,7 @@ class LoginForm(FlaskForm):
 class DonateForm(FlaskForm):
 
     donation = IntegerField(validators=[InputRequired()])
-    cardnum = StringField(validators=[InputRequired(), Length(min=15, max=16, message='Card number must be 16 digits in length')])
+    cardnum = StringField(validators=[InputRequired(), Length(min=16, max=16, message='Card number must be 16 digits in length')])
 
     # TODO add CVC to
     # cvc = StringField(validators=[InputRequired(), Length(min=2, max=3, message='CVV must be 3 digits long')])
@@ -54,4 +54,25 @@ class DonateForm(FlaskForm):
         donation = self.donation.data
         card_number = self.cardnum.data
         if valid_payment(donation, card_number):  # forward data to billing.py
+            raise ValidationError("Unable to make this donation, please check with your bank")
+
+
+class BillingForm(FlaskForm):
+
+    address_1 = IntegerField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
+    address_2 = IntegerField(validators=[Length(min=3, max=100, message="This field doesn't look right")])
+    city_town = IntegerField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
+    county = IntegerField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
+    cardnum = StringField(validators=[InputRequired(), Length(min=16, max=16, message='Card number must be 16 digits in length')])
+
+    # TODO add CVC
+    # cvc = StringField(validators=[InputRequired(), Length(min=2, max=3, message='CVV must be 3 digits long')])
+
+    submit = SubmitField()
+
+    # Donation bank validator
+    def validate_cardnum(self, cardnum):
+        cost = 10  # TODO get shirt price here
+        card_number = self.cardnum.data
+        if valid_payment(cost, card_number):  # forward data to billing.py
             raise ValidationError("Unable to make this donation, please check with your bank")
