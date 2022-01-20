@@ -118,8 +118,11 @@ if __name__ == '__main__':
 
     # import blueprints
     from user.views import users_blueprint
+    from user.quiz import quiz_blueprint
 
     # register blueprints with app
     app.register_blueprint(users_blueprint)
+    app.register_blueprint(quiz_blueprint)
+
 
     app.run(host=my_host, port=free_port, debug=True)
