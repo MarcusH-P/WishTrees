@@ -6,6 +6,7 @@ from flask_bootstrap import Bootstrap
 from datetime import datetime
 from functools import wraps
 
+
 # CONFIG
 app = Flask(__name__)
 # Connecting to mysql database using python sql alchemy
