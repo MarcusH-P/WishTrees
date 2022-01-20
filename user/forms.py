@@ -1,10 +1,11 @@
 import re
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField
+from wtforms import StringField, SubmitField, PasswordField, IntegerField
 from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError
+from user.billing import valid_payment
+
 
 # Character check to check for special characters (prevents security exploits)
-
 def character_check(form,field):
     excluded_chars = "*?!'^+%&/()=}][{$#@<>"
     for char in field.data:
@@ -48,8 +49,9 @@ class DonateForm(FlaskForm):
 
     submit = SubmitField()
 
-    # Password validator
-    def validate_cardnum(self, password):
-        cn = re.compile(r'(?=.*\d)(?=.*[A-Z])(?=.*[^\w\s])')
-        if not cn.match(self.cardnum.data):
+    # Donation bank validator
+    def validate_cardnum(self, cardnum):
+        donation = self.donation.data
+        card_number = self.cardnum.data
+        if valid_payment(donation, card_number):  # forward data to billing.py
             raise ValidationError("Unable to make this donation, please check with your bank")
