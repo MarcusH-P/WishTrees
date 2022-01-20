@@ -21,4 +21,3 @@ onetimepass
 pyqrcode
 pymysql
 Flask-Bootstrap
-copy

@@ -13,8 +13,8 @@ wishtrees_questions = {
     'What can you do to help': ['All of the above', 'Donate to charities', 'Buy our merch', 'Complete our quizzes']
 }
 
-# questions = copy.deepcopy(wishtrees_questions)
-questions = wishtrees_questions
+questions = copy.deepcopy(wishtrees_questions)
+#  questions = wishtrees_questions
 
 
 # This function is for shuffling the dictionary elements.
