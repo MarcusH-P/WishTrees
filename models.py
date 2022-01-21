@@ -106,27 +106,6 @@ class QuizHistory(UserMixin, db.Model):
         self.score = score
 
 
-class Quiz(UserMixin, db.Model):
-    __tablename__ = 'quiz_game'
-
-    quiz_key = db.Column(db.String(100), nullable=False, primary_key=True)
-    question_number = db.Column(db.String(100), nullable=False)
-    question = db.Column(db.String(100), nullable=False)
-    answer = db.Column(db.String(100), nullable=False)
-    answer2 = db.Column(db.String(100), nullable=False)
-    answer3 = db.Column(db.String(100), nullable=False)
-    answer4 = db.Column(db.String(100), nullable=False)
-
-    def __init__(self, quiz_key, question_number, question, answer, answer2, answer3, answer4):
-        self.quiz_key = quiz_key
-        self.question_number = question_number
-        self.question = question
-        self.answer = answer
-        self.answer2 = answer2
-        self.answer3 = answer3
-        self.answer4 = answer4
-
-
 class Security(UserMixin, db.Model):
     __tablename__ = 'security_login_logout'
 
@@ -191,7 +170,20 @@ def init_db():
                  role='admin',
                  phone=None)
     db.session.add(admin)
-
+    user = User(email='stevebell@gmail.com',
+                password='Pass1ng!t',
+                firstname='Steve',
+                lastname='Bell',
+                role='user',
+                phone='07546924889')
+    db.session.add(user)
+    charity = User(email='powerplanters@gmail.com',
+                   password='Power2Tree$',
+                   firstname='PowerPlanters',
+                   lastname='org',
+                   role='charity',
+                   phone='07248854699')
+    db.session.add(charity)
     # Adding all current products to the DB
     product_1 = Product(product_number="pp_tshirt_black_20",
                         product_type="T Shirt",
