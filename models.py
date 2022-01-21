@@ -170,6 +170,7 @@ def init_db():
                  role='admin',
                  phone=None)
     db.session.add(admin)
+
     user = User(email='stevebell@gmail.com',
                 password='Pass1ng!t',
                 firstname='Steve',
@@ -177,6 +178,7 @@ def init_db():
                 role='user',
                 phone='07546924889')
     db.session.add(user)
+
     charity = User(email='powerplanters@gmail.com',
                    password='Power2Tree$',
                    firstname='PowerPlanters',
@@ -184,6 +186,7 @@ def init_db():
                    role='charity',
                    phone='07248854699')
     db.session.add(charity)
+
     # Adding all current products to the DB
     product_1 = Product(product_number="pp_tshirt_black_20",
                         product_type="T Shirt",
