@@ -1,12 +1,11 @@
 import smtplib
 from email.message import EmailMessage
 import random
-
 from flask import render_template, redirect, url_for
 from flask_login import current_user
 
 
-def get_cpu_image():  # TODO return a random CPU image URL
+def get_cpu_image():
     cpu_list = [  # List of CPU images here
         "https://lh3.googleusercontent.com/pw/AM-JKLW06QsLA3Fjor8GZSFgLV4VpBa8c6iPHgLfY_mTcNMObz-zO38jooA9PXcPvRIoDOyxzvAHL0nupR5JLsb6zWa0RmG0qoVo3UgoauHEgGf8saF2Q5O00F2CiKQPSHspFXMqVOTXN-eSgkotfB-nQg=w338-h451-no",
         "https://lh3.googleusercontent.com/pw/AM-JKLV8kUOmG8C_ngoJpn1VGLgiqI_60oV7P1kA3Ld2Y8GfT7rVn2xlRr-RcBHDaVaf1fQKrtUx3RFzF-5R-eKUCqP2iLd2HfSHynlaHDCaKip3yJW2Wpbv1ApMAWazGfhLYf2BihJdg4x0RTPbWfs-HA=w338-h451-no",
