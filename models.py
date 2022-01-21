@@ -45,7 +45,6 @@ class User(UserMixin, db.Model):
         if self.otp_secret is None:
             self.otp_secret = base64.b32encode(os.urandom(10)).decode('utf-8')  # Creates One Time Password secret
 
-
     def get_uri(self):  # Generates Uri for 2FA QR Code
         return 'otpauth://totp/WishTrees:{0}?secret={1}&issuer=WishTrees' \
             .format(self.email, self.otp_secret)
@@ -170,7 +169,7 @@ def new_security_error(error):  # Creates security error to make logging more co
 
 
 class Donation(UserMixin, db.Model):
-    __tablename__ = 'Donations'
+    __tablename__ = 'donations'
 
     donation_id = db.Column(db.Integer, primary_key=True)
     user_key = db.Column(db.String(100), nullable=False)
@@ -184,11 +183,56 @@ class Donation(UserMixin, db.Model):
 def init_db():
     db.drop_all()
     db.create_all()
-    admin = User(email='admin@email.com',
-                 password='Admin1!',
-                 firstname='Alice',
-                 lastname='Jones',
+
+    admin = User(email='admin@gmail.com',
+                 password='Passw0rd!',
+                 firstname='Alex',
+                 lastname='Smith',
                  role='admin',
                  phone=None)
     db.session.add(admin)
+
+    product_1 = Product(product_number="pp_tshirt_black_20",
+                        product_type="T Shirt",
+                        product_colour="Black",
+                        charity_name="Power Planters",
+                        price="20")
+
+    product_2 = Product(product_number="wt_tshirt_black_20",
+                        product_type="T Shirt",
+                        product_colour="Black",
+                        charity_name="WishTrees",
+                        price="20")
+
+    product_3 = Product(product_number="pp_tshirt_white_20",
+                        product_type="T Shirt",
+                        product_colour="White",
+                        charity_name="Power Planters",
+                        price="20")
+
+    product_4 = Product(product_number="tru_tshirt_white_20",
+                        product_type="T Shirt",
+                        product_colour="White",
+                        charity_name="Trees R Us",
+                        price="20")
+
+    product_5 = Product(product_number="tru_hoodie_black_40",
+                        product_type="Hoodie",
+                        product_colour="Black",
+                        charity_name="Trees R Us",
+                        price="40")
+
+    product_6 = Product(product_number="wt_tshirt_grey_25",
+                        product_type="T Shirt",
+                        product_colour="Grey",
+                        charity_name="WishTrees",
+                        price="25")
+
+    db.session.add(product_1)
+    db.session.add(product_2)
+    db.session.add(product_3)
+    db.session.add(product_4)
+    db.session.add(product_5)
+    db.session.add(product_6)
+
     db.session.commit()

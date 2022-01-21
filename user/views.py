@@ -165,8 +165,9 @@ def donate():
     return render_template('donate.html', form=form)
 
 
+@users_blueprint.route('/billing/<string:product>', methods=['GET', 'POST'])
 @users_blueprint.route('/billing', methods=['GET', 'POST'])
-def billing():
+def billing(product):
 
     # create signup form object
     form = BillingForm()
@@ -176,7 +177,7 @@ def billing():
 
         # create a new user with the form data
         new_order = Order(
-            product_number="Product number",
+            product_number=product,
             user_key=current_user.user_key,
             address_line_1=form.address_1.data,
             address_line_2=form.address_2.data,
@@ -192,4 +193,4 @@ def billing():
         return render_template('home.html')
 
     # if request method is GET or form not valid re-render signup page
-    return render_template('donate.html', form=form)
+    return render_template('billing.html', form=form)

@@ -59,10 +59,10 @@ class DonateForm(FlaskForm):
 
 class BillingForm(FlaskForm):
 
-    address_1 = IntegerField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
-    address_2 = IntegerField(validators=[Length(min=3, max=100, message="This field doesn't look right")])
-    city_town = IntegerField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
-    county = IntegerField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
+    address_1 = StringField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
+    address_2 = StringField(validators=[Length(min=3, max=100, message="This field doesn't look right")])
+    city_town = StringField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
+    county = StringField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
     cardnum = StringField(validators=[InputRequired(), Length(min=16, max=16, message='Card number must be 16 digits in length')])
 
     # TODO add CVC
