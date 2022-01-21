@@ -93,7 +93,7 @@ def login():
             db.session.add(user)
             db.session.commit()
 
-            if current_user.role == 'user':
+            if current_user.role == 'user' or current_user.role == 'charity':
                 return render_template('home.html')
             elif current_user.role == 'admin':
                 return render_template('admin.html')

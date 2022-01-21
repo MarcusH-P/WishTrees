@@ -1,4 +1,6 @@
 from flask import Flask, render_template, Blueprint, request
+from flask_login import current_user
+from app import db_add_commit
 import random
 import copy
 
@@ -7,7 +9,7 @@ quiz_blueprint = Blueprint('quiz', __name__, template_folder='templates')
 wishtrees_questions = {
     # Format is 'question':[options]
     'How much money has WishTrees raised': ['£10 million', '£1 billion', '£500,000', '£250,000'],
-    'How many trees have WishTrees help plant': ['1 million', '250,000', '12 million', '700,000'],
+    'How many trees have WishTrees helped plant': ['1 million', '250,000', '12 million', '700,000'],
     'When was WishTrees founded': ['2012', '2020', '2015', '2008'],
     'How many countries has WishTrees planted in': ['42 countries', '3 countries', '18 countries', '72 countries'],
     'What can you do to help': ['All of the above', 'Donate to charities', 'Buy our merch', 'Complete our quizzes']
@@ -29,7 +31,7 @@ def shuffle(q):
 
 
 @quiz_blueprint.route('/quiz')
-def quiz():
+def quiz1():
     questions_shuffled = shuffle(questions)
     for i in questions.keys():
         random.shuffle(questions[i])
@@ -43,4 +45,7 @@ def quiz_answers():
         answered = request.form[i]
         if wishtrees_questions[i][0] == answered:
             correct = correct + 1
+    the_user = current_user
+    the_user.points = current_user.points + (correct*100)
+    db_add_commit(the_user)
     return '<h1>Correct Answers: <u>' + str(correct) + '</u></h1>'
