@@ -2,18 +2,21 @@ import smtplib
 from email.message import EmailMessage
 import random
 
+from flask import render_template, redirect, url_for
+from flask_login import current_user
+
 
 def get_cpu_image():  # TODO return a random CPU image URL
     cpu_list = [  # List of CPU images here
-        "1",
-        "2",
-        "3"
+        "https://lh3.googleusercontent.com/pw/AM-JKLW06QsLA3Fjor8GZSFgLV4VpBa8c6iPHgLfY_mTcNMObz-zO38jooA9PXcPvRIoDOyxzvAHL0nupR5JLsb6zWa0RmG0qoVo3UgoauHEgGf8saF2Q5O00F2CiKQPSHspFXMqVOTXN-eSgkotfB-nQg=w338-h451-no",
+        "https://lh3.googleusercontent.com/pw/AM-JKLV8kUOmG8C_ngoJpn1VGLgiqI_60oV7P1kA3Ld2Y8GfT7rVn2xlRr-RcBHDaVaf1fQKrtUx3RFzF-5R-eKUCqP2iLd2HfSHynlaHDCaKip3yJW2Wpbv1ApMAWazGfhLYf2BihJdg4x0RTPbWfs-HA=w338-h451-no",
+        "https://lh3.googleusercontent.com/pw/AM-JKLWEdTc8alhDpleJnd7160WxRxLZBDlduOILR47fntpKq5KJ9t5Xx8d8SoOvMOAA4LVtrBOegurFLVAq9rDHVJ3gdNxLexhPCC9a1iHfp1hX5TCzkrviI7rQ8GqPOoxZcISMbf6GAFnPwufl6SjMLQ=w338-h451-no"
     ]
 
     return random.choice(cpu_list)
 
 
-def email_users(recipient, user_points):  # TODO
+def email_users(recipient, user_points):
 
     html_content = ("""
     <!DOCTYPE html>
@@ -33,11 +36,19 @@ def email_users(recipient, user_points):  # TODO
 
     <body style="background-color: #fff8cd;">
         <! WishTrees Logo >
-        <img src="https://lh3.googleusercontent.com/-PI4eFXKhlMV0sasSV4Bh-N1XDu8eVW50piS9QkbK9uQzqVIYw2Obkh-tbMe-N2KodvmsY2IxzlV-nHAzyHr4i63tvUWi-GOQEQU19cSorEpygE0xzK7_AYdy-vroq94-P04CuUh1xQ2pcyq43zGKCfbHmDQI_UP-QjzfdvsLijKQt2CKNz6ROa04u95nPqlI5UglG3fipAJls75Hf3f2KHAbhzoaRul8Z-jnDlji-FhH9tjl7-EkCWNJAXDJtFQSTdYMvi5n6a4IXl52Rm6xECUNsRKmIO_QrvId7C2apg9mAI1-RAE0Iu0dj3N6hEaHJDoolWlCJPSF9Ij_COupHjhUgyM2tVzi3R_0r1ylvIRpLoE8HVMmHZYYLnhmM_pLtkEmQDCYAbnhvPPUN3LDOArCqB-qNG_ONmXTND-NRyHYsIZ2aGlLvk8OvBFNlXSVhwIncsbcUqeVs9PviRxuTAR9PEcHikgDN_tLSoX61nqB6xmaMTIdEwQSqN9PmzNN4zSpcSVb42SPKbF6tMWaJHJjmFeJrJi-UmfOxSWwQKdYwsWL548no07gHwOqMASqnSD4QsP0eHtlCCwINnhOefuvK00FXVlBKixq5fnknrOADTYX1ohTl-7JUNGYi2ssggBgd1zxvqyF3wXyOkvYOGUGY0b5SOzTnJ2TxPqgsRKaok2FFeoBM434UD8hTssfBL3aXbLJTnz-ewy=w3360-h946-no" alt="WishTrees Logo" width="90%">
-        <br><h1 style="color: #c993dc">Here's your point summary</h1>
-        <h2 style="color: #c993dc">""" + str(user_points) + """</h2>
-        <br>
-        <h1 style="color: #c993dc">How about a random charity to donate to?</h1>
+        <img src="https://lh3.googleusercontent.com/pw/AM-JKLW4VYOR4dU9h4JzJsuNtnrqv2mktXIPtxyobM1uqXIrmN_ylHNYbgbmJ4toX0UCJFkomt_8aHYzdbcmVmFQdveCa8s-I5507xo5cjgscqCtV4XnLzWR9HJcfOas2CDmEEuXbzipnUjlMItej0ojzg=w3360-h946-no" alt="WishTrees Logo" width="90%">
+        <br><br><h1 style="color: #c993dc; text-align:center">Here's your point summary</h1>
+        <h2 style="color: #c993dc; text-align:center">""" + str(user_points) + """</h2>
+        <br><br>
+        
+        <br><h1 style="color: #c993dc; text-align:center">How about a random charity to donate to?</h1>
+
+        <div class="column">
+            <img src=' """ + get_cpu_image() + """ ' alt='email_img'>
+            <h1 style="color: #c993dc; text-align:center">Charities will always need your help!</h1>            
+        </div>
+        
+        
     </body>
     </html>
     """)
@@ -66,8 +77,4 @@ def email_users(recipient, user_points):  # TODO
         smtp.login(email_address, email_password)
         smtp.send_message(email_contents)
 
-
-user = ""
-points = 1000
-
-# email_users(user, points)
+    # return redirect(url_for('profile'))
