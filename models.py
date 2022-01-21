@@ -45,7 +45,6 @@ class User(UserMixin, db.Model):
         if self.otp_secret is None:
             self.otp_secret = base64.b32encode(os.urandom(10)).decode('utf-8')  # Creates One Time Password secret
 
-
     def get_uri(self):  # Generates Uri for 2FA QR Code
         return 'otpauth://totp/WishTrees:{0}?secret={1}&issuer=WishTrees' \
             .format(self.email, self.otp_secret)
@@ -170,7 +169,7 @@ def new_security_error(error):  # Creates security error to make logging more co
 
 
 class Donation(UserMixin, db.Model):
-    __tablename__ = 'Donations'
+    __tablename__ = 'donations'
 
     donation_id = db.Column(db.Integer, primary_key=True)
     user_key = db.Column(db.String(100), nullable=False)
