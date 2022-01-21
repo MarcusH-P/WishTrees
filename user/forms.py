@@ -75,4 +75,4 @@ class BillingForm(FlaskForm):
         cost = 10  # TODO get shirt price here
         card_number = self.cardnum.data
         if valid_payment(cost, card_number):  # forward data to billing.py
-            raise ValidationError("Unable to make this donation, please check with your bank")
+            raise ValidationError("Unable to make this payment, please check with your bank")

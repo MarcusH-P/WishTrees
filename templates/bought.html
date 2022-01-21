@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="column is-6 is-offset-3">
+    <h1 class="title" style="color: #c993dc">Thank You For Your Purchase</h1>
+    <br>
+    <div class="column">
+        <a href="{{ url_for('home') }}">
+            <h1 style="color: #c993dc">Your order is confirmed</h1>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

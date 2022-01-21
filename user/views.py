@@ -144,7 +144,7 @@ def profile():
 
 @users_blueprint.route('/donate', methods=['GET', 'POST'])
 def donate():
-    # create signup form object
+    # create donate form object
     form = DonateForm()
 
     # if request method is POST or form is valid
@@ -155,13 +155,12 @@ def donate():
             user_key=current_user.user_key,
             donation_amount=form.donation.data)
 
-        # add the new user to the database
+        # add the new donation to the database
         db_add_commit(new_donation)
 
-        # TODO session['email'] = new_donation.email
         return render_template('home.html')
 
-    # if request method is GET or form not valid re-render signup page
+    # if request method is GET or form not valid re-render donate page
     return render_template('donate.html', form=form)
 
 
@@ -169,13 +168,13 @@ def donate():
 @users_blueprint.route('/billing', methods=['GET', 'POST'])
 def billing(product):
 
-    # create signup form object
+    # create billing form object
     form = BillingForm()
 
     # if request method is POST or form is valid
     if form.validate_on_submit():
 
-        # create a new user with the form data
+        # create a new order with the form data
         new_order = Order(
             product_number=product,
             user_key=current_user.user_key,
@@ -185,12 +184,11 @@ def billing(product):
             county=form.county.data,
             date=datetime.now())
 
-        # add the new user to the database
+        # add the new order to the database
         db.session.add(new_order)
         db.session.commit()
 
-        # session['email'] = new_donation.email
-        return render_template('home.html')
+        return render_template('bought.html')
 
-    # if request method is GET or form not valid re-render signup page
+    # if request method is GET or form not valid re-render billing page
     return render_template('billing.html', form=form)
