@@ -1,5 +1,5 @@
 from flask import Flask, render_template, Blueprint, request, session
-from flask_login import current_user
+from flask_login import current_user, login_required
 from app import db_add_commit
 import random
 import copy
@@ -58,6 +58,7 @@ def shuffle(q):
 
 
 @quiz_blueprint.route('/quiz1')
+@login_required
 def quiz1():
     questions = copy.deepcopy(wishtrees_questions)
     questions_shuffled = shuffle(questions)
@@ -69,6 +70,7 @@ def quiz1():
 
 
 @quiz_blueprint.route('/quiz2')
+@login_required
 def quiz2():
     questions = copy.deepcopy(LifeOnLand_questions)
     questions_shuffled = shuffle(questions)
@@ -80,6 +82,7 @@ def quiz2():
 
 
 @quiz_blueprint.route('/quiz3')
+@login_required
 def quiz3():
     questions = copy.deepcopy(PowerPlanters_questions)
     questions_shuffled = shuffle(questions)

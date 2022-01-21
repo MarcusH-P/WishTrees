@@ -133,6 +133,7 @@ def logout():
 
 
 @users_blueprint.route("/profile")
+@login_required
 def profile():
     return render_template('profile.html',
                            email=current_user.email,
@@ -143,6 +144,7 @@ def profile():
 
 
 @users_blueprint.route('/donate', methods=['GET', 'POST'])
+@login_required
 def donate():
     # create donate form object
     form = DonateForm()
@@ -166,6 +168,7 @@ def donate():
 
 @users_blueprint.route('/billing/<string:product>', methods=['GET', 'POST'])
 @users_blueprint.route('/billing', methods=['GET', 'POST'])
+@login_required
 def billing(product):
 
     # create billing form object
