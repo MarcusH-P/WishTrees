@@ -8,7 +8,7 @@
         {% for i in q %}
             <li>-  <u>{{i}}</u> ?</li>
             {% for j in o[i] %}
-                <input type='radio' value='{{j}}' name='{{i}}' />{{j}}
+                <input type='radio' value='{{j}}' name='{{i}}' required />{{j}}
             {% endfor %}
         {% endfor %}
     </ol>
