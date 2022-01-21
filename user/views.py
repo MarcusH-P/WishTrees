@@ -188,7 +188,7 @@ def billing(product):
         db.session.add(new_order)
         db.session.commit()
 
-        return render_template('home.html')
+        return render_template('bought.html')
 
     # if request method is GET or form not valid re-render billing page
     return render_template('billing.html', form=form)
