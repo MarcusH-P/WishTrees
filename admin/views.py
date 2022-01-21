@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash
 from flask_login import current_user, login_required
 from models import User, Donation, Security, SecurityError
 from app import requires_roles, db_add_commit, db
+
 admin_blueprint = Blueprint('admin', __name__, template_folder='templates')
 
 
@@ -58,5 +59,3 @@ def delete_user():
 @requires_roles('admin')
 def view_security_errors():
     return render_template('admin.html', all_errors=SecurityError.query.all())
-
-

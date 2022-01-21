@@ -19,7 +19,7 @@
                 {{ form.csrf_token() }}
                 <div class="control">
                     {{ form.address_1(class="input", placeholder="Address Line 1") }}
-                    {%  for error in form.address_1.errors %}
+                    {% for error in form.address_1.errors %}
                     {{ error }}
                     {% endfor %}
                 </div>

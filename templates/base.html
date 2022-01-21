@@ -6,27 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>WishTrees</title>
-    <link rel="icon" type="image/x-icon" href="https://lh3.googleusercontent.com/pw/AM-JKLXTpG992L13u-rvFM390Dz1tyQiLxBMosFw6WNVMLZUyxULf9BI50015ylcuS01ReL3EjuGGrEBV5GZmQOWMlp9qufeu5IwY4AQXxNBncH93nTKSBV3XPxAmR7Rja02VRwgr2GkCzUU0rfEW28o5w=w879-h902-no">
+    <link rel="icon" type="image/x-icon"
+          href="https://lh3.googleusercontent.com/pw/AM-JKLXTpG992L13u-rvFM390Dz1tyQiLxBMosFw6WNVMLZUyxULf9BI50015ylcuS01ReL3EjuGGrEBV5GZmQOWMlp9qufeu5IwY4AQXxNBncH93nTKSBV3XPxAmR7Rja02VRwgr2GkCzUU0rfEW28o5w=w879-h902-no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
 </head>
 
 <body>
 
-    <style>
+<style>
 
     .table {
-      margin-left: auto;
-      margin-right: auto;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .logo{
-        position:fixed;
+    .logo {
+        position: fixed;
         top: 8px;
         left: 16px;
         font-size: 18px;
     }
 
-    .column1{
+    .column1 {
         float: left;
         width: 20%;
         padding: 5px;
@@ -36,7 +37,8 @@
         display: table;
         content: "";
         clear: both;
-}
+    }
+
     .footer1 {
         position: absolute;
         top: 5px;
@@ -70,106 +72,113 @@
     body {
         font-family: "Times New Roman", Times, serif;
     }
-    </style>
+</style>
 
-    <section class="hero is-fullheight" style="background-color: #fff8cd; color: #c993dc;" >
+<section class="hero is-fullheight" style="background-color: #fff8cd; color: #c993dc;">
 
 
-        <div class="hero-head" style="color: #c993dc;">
-            <nav class="navbar">
-                <div class="container">
+    <div class="hero-head" style="color: #c993dc;">
+        <nav class="navbar">
+            <div class="container">
 
-                    <div id="navbarMenuHeroA" class="navbar-menu">
-                       <div class="navbar-end">
-                           <img src="https://lh3.googleusercontent.com/pw/AM-JKLW4VYOR4dU9h4JzJsuNtnrqv2mktXIPtxyobM1uqXIrmN_ylHNYbgbmJ4toX0UCJFkomt_8aHYzdbcmVmFQdveCa8s-I5507xo5cjgscqCtV4XnLzWR9HJcfOas2CDmEEuXbzipnUjlMItej0ojzg=w1920-h540-no" alt="logo" class="logo" width="200" height="20">
-                           <a href="{{ url_for('home') }}" class="navbar-item"  style=" color: #c993dc;">
-                               Home
-                           </a>
-                           {% if not current_user.is_authenticated %}
-                           <a href="{{ url_for('users.login')}}" class="navbar-item"  style=" color: #c993dc;">
-                               Login
-                           </a>
-                           <a href="{{ url_for('users.register')}}" class="navbar-item"  style=" color: #c993dc;">
-                               Register
-                           </a>
-                           {%endif%}
-                           {% if current_user.is_authenticated %}
-                           <a href="{{ url_for('users.profile')}}" class="navbar-item"  style=" color: #c993dc;">
-                               Profile
-                           </a>
-                           {%endif%}
-                           <a href="{{ url_for('users.donate')}}" class="navbar-item"  style=" color: #c993dc;">
-                               DONATE
-                           </a>
-                           {% if current_user.is_authenticated and current_user.role == 'admin' %}
-                           <a href="{{ url_for('admin')}}" class="navbar-item" style=" color: #c993dc;">
-                               Admin
-                           </a>
-                           {%endif%}
-                           <a href="{{ url_for('shop')}}" class="navbar-item" style=" color: #c993dc;">
-                               Shop
-                           </a>
-                           <a href="{{ url_for('charities')}}" class="navbar-item" style=" color: #c993dc;">
-                               Charities
-                           </a>
-                           <a href="{{ url_for('games')}}" class="navbar-item" style=" color: #c993dc;">
-                               Games
-                           </a>
-                           <a href={{url_for('about')}} class="navbar-item" style=" color: #c993dc;">
-                               About
-                           </a>
-                           {% if current_user.is_authenticated%}
-                           <a href={{url_for('users.logout')}} class="navbar-item" style=" color: #c993dc;">
-                               logout
-                           </a>
-                           {%endif%}
-                       </div>
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    <div class="navbar-end">
+                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLW4VYOR4dU9h4JzJsuNtnrqv2mktXIPtxyobM1uqXIrmN_ylHNYbgbmJ4toX0UCJFkomt_8aHYzdbcmVmFQdveCa8s-I5507xo5cjgscqCtV4XnLzWR9HJcfOas2CDmEEuXbzipnUjlMItej0ojzg=w1920-h540-no"
+                             alt="logo" class="logo" width="200" height="20">
+                        <a href="{{ url_for('home') }}" class="navbar-item" style=" color: #c993dc;">
+                            Home
+                        </a>
+                        {% if not current_user.is_authenticated %}
+                        <a href="{{ url_for('users.login')}}" class="navbar-item" style=" color: #c993dc;">
+                            Login
+                        </a>
+                        <a href="{{ url_for('users.register')}}" class="navbar-item" style=" color: #c993dc;">
+                            Register
+                        </a>
+                        {%endif%}
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('users.profile')}}" class="navbar-item" style=" color: #c993dc;">
+                            Profile
+                        </a>
+                        {%endif%}
+                        <a href="{{ url_for('users.donate')}}" class="navbar-item" style=" color: #c993dc;">
+                            DONATE
+                        </a>
+                        {% if current_user.is_authenticated and current_user.role == 'admin' %}
+                        <a href="{{ url_for('admin')}}" class="navbar-item" style=" color: #c993dc;">
+                            Admin
+                        </a>
+                        {%endif%}
+                        <a href="{{ url_for('shop')}}" class="navbar-item" style=" color: #c993dc;">
+                            Shop
+                        </a>
+                        <a href="{{ url_for('charities')}}" class="navbar-item" style=" color: #c993dc;">
+                            Charities
+                        </a>
+                        <a href="{{ url_for('games')}}" class="navbar-item" style=" color: #c993dc;">
+                            Games
+                        </a>
+                        <a href={{url_for('about')}} class="navbar-item" style=" color: #c993dc;">
+                            About
+                        </a>
+                        {% if current_user.is_authenticated%}
+                        <a href={{url_for('users.logout')}} class="navbar-item" style=" color: #c993dc;">
+                            logout
+                        </a>
+                        {%endif%}
                     </div>
                 </div>
-            </nav>
-        </div>
-
-        <div class="hero-body">
-            <div class="container has-text-centered">
-               {% block content %}
-               {% endblock %}
             </div>
+        </nav>
+    </div>
+
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            {% block content %}
+            {% endblock %}
         </div>
-    </section>
-    <figure class="image is-1920x306 has-text-centered" style="position: relative">
+    </div>
+</section>
+<figure class="image is-1920x306 has-text-centered" style="position: relative">
 
-        <img src="https://lh3.googleusercontent.com/pw/AM-JKLWlj2EzbTQX6fNq7pn8wRJwfWyUlrccJGZKfjiq6XN4Gjh5hdMuv76ViMF3cK5gwc8XLndmS20ON4YSuPvomcNEnx_60Cnaj0bSeRcggXbUZaki9PQ1bBytl9SCgj39EagsM5ZWYxKxYDrWjAa_rg=w1920-h306-no" alt="footer">
+    <img src="https://lh3.googleusercontent.com/pw/AM-JKLWlj2EzbTQX6fNq7pn8wRJwfWyUlrccJGZKfjiq6XN4Gjh5hdMuv76ViMF3cK5gwc8XLndmS20ON4YSuPvomcNEnx_60Cnaj0bSeRcggXbUZaki9PQ1bBytl9SCgj39EagsM5ZWYxKxYDrWjAa_rg=w1920-h306-no"
+         alt="footer">
 
-        <figure class="is-inline-block">
-            <div class="row">
-                <a href="https://www.facebook.com/">
-                    <div class="column1 image is-64x64 footer1">
-                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLUX4arN90ICXaWAQ7cHc-61JhL8FBRLEFq6gOezCADv18pQi26W-RX1-A86zv7VeZ5efqHh_akcli0ASfT_vENCafIIlqZcimp-Ietrulb82JzqEVhZmW-6ca2aA70Zz7KV_P_UAApRH1ZdY3ZHpw=w175-h174-no" alt="facebook_icon">
-                    </div>
-                </a>
-                <a href="https://www.instagram.com/?hl=en">
-                    <div class="column1 image is-64x64 footer2">
-                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLXLSGBNryTv-kyav4qrTW_srto0Hedav7lTYt8OgsU_PyJ0TC4zs8K-jdrPO6PFQZmE_jJebPZqgP7bpmyhUTkYlUdkQC8hpamnbg9jA0CkXWuBYKZRBSQZcE6PmQgTQLQmozxzUKYpChKOCfEWcg=w175-h174-no" alt="insta_icon">
-                    </div>
-                </a>
-                <a href="https://twitter.com/?lang=en">
-                    <div class="column1 image is-64x64 footer3">
-                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLXtk8QRy6taNzTe4wFTuYf0G5OPrUBmDDFeSJfWOmidtx98STNNcDZR7jihz2iUvUjUYEts_XzTfRJcsPjNBlBgHDvr40rukG5TYpuG3S17rVQKzlVXiwhW7FJH4FjTB1KP8h-fe_FAWwz6AQUB5A=w175-h174-no" alt="twitter_icon">
-                    </div>
-                </a>
-                <a href="https://www.youtube.com/">
-                    <div class="column1 image is-64x64 footer4">
-                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLUzv5u5nFqfoHMiavW7xzMZHQnxuNSFrnH9YehSVF1LaGgbH3NDPACtyiSZhFxbOWgGgwxNOjTi98outozgC8A48RZI7XsgBWS8uZJVr9Tcar2RBvDQ_gw5AKs76CmWkOctQde05t648q4NIUYoSg=w175-h174-no" alt="yt_icon">
-                    </div>
-                </a>
-                <a href="https://www.linkedin.com/">
-                    <div class="column1 image is-64x64 footer5">
-                        <img src="https://lh3.googleusercontent.com/pw/AM-JKLWxPqfAMd2-L57SRS6FvUhRSXRWn2Dp35fsycWr6ympWTmXKU1_SYiTKNos6KNTXKUGEnzrJlXfF1r4eL-rkKVC2J1M8chEBWUTnbSBxI7W0mc6r8wud3rZWbkRrzpzZU_GaoH0wKyIMmon_eIirQ=w175-h174-no" alt="in_icon">
-                    </div>
-                </a>
-            </div>
-        </figure>
+    <figure class="is-inline-block">
+        <div class="row">
+            <a href="https://www.facebook.com/">
+                <div class="column1 image is-64x64 footer1">
+                    <img src="https://lh3.googleusercontent.com/pw/AM-JKLUX4arN90ICXaWAQ7cHc-61JhL8FBRLEFq6gOezCADv18pQi26W-RX1-A86zv7VeZ5efqHh_akcli0ASfT_vENCafIIlqZcimp-Ietrulb82JzqEVhZmW-6ca2aA70Zz7KV_P_UAApRH1ZdY3ZHpw=w175-h174-no"
+                         alt="facebook_icon">
+                </div>
+            </a>
+            <a href="https://www.instagram.com/?hl=en">
+                <div class="column1 image is-64x64 footer2">
+                    <img src="https://lh3.googleusercontent.com/pw/AM-JKLXLSGBNryTv-kyav4qrTW_srto0Hedav7lTYt8OgsU_PyJ0TC4zs8K-jdrPO6PFQZmE_jJebPZqgP7bpmyhUTkYlUdkQC8hpamnbg9jA0CkXWuBYKZRBSQZcE6PmQgTQLQmozxzUKYpChKOCfEWcg=w175-h174-no"
+                         alt="insta_icon">
+                </div>
+            </a>
+            <a href="https://twitter.com/?lang=en">
+                <div class="column1 image is-64x64 footer3">
+                    <img src="https://lh3.googleusercontent.com/pw/AM-JKLXtk8QRy6taNzTe4wFTuYf0G5OPrUBmDDFeSJfWOmidtx98STNNcDZR7jihz2iUvUjUYEts_XzTfRJcsPjNBlBgHDvr40rukG5TYpuG3S17rVQKzlVXiwhW7FJH4FjTB1KP8h-fe_FAWwz6AQUB5A=w175-h174-no"
+                         alt="twitter_icon">
+                </div>
+            </a>
+            <a href="https://www.youtube.com/">
+                <div class="column1 image is-64x64 footer4">
+                    <img src="https://lh3.googleusercontent.com/pw/AM-JKLUzv5u5nFqfoHMiavW7xzMZHQnxuNSFrnH9YehSVF1LaGgbH3NDPACtyiSZhFxbOWgGgwxNOjTi98outozgC8A48RZI7XsgBWS8uZJVr9Tcar2RBvDQ_gw5AKs76CmWkOctQde05t648q4NIUYoSg=w175-h174-no"
+                         alt="yt_icon">
+                </div>
+            </a>
+            <a href="https://www.linkedin.com/">
+                <div class="column1 image is-64x64 footer5">
+                    <img src="https://lh3.googleusercontent.com/pw/AM-JKLWxPqfAMd2-L57SRS6FvUhRSXRWn2Dp35fsycWr6ympWTmXKU1_SYiTKNos6KNTXKUGEnzrJlXfF1r4eL-rkKVC2J1M8chEBWUTnbSBxI7W0mc6r8wud3rZWbkRrzpzZU_GaoH0wKyIMmon_eIirQ=w175-h174-no"
+                         alt="in_icon">
+                </div>
+            </a>
+        </div>
     </figure>
+</figure>
 </body>
 
 </html>

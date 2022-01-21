@@ -125,7 +125,7 @@ def new_security_event(login, email):  # Creates security event to make logging 
         login=login,
         email=email,
         date=datetime.now()
-        )
+    )
 
 
 class SecurityError(UserMixin, db.Model):

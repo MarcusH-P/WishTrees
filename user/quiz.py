@@ -78,7 +78,8 @@ def quiz2():
         random.shuffle(questions[i])
     session['questions'] = questions
     session['answers'] = LifeOnLand_questions
-    return render_template('quiz.html', q=questions_shuffled, o=questions, quizspeach='UN Sustainable Goal 15 - Life on Land Quiz')
+    return render_template('quiz.html', q=questions_shuffled, o=questions,
+                           quizspeach='UN Sustainable Goal 15 - Life on Land Quiz')
 
 
 @quiz_blueprint.route('/quiz3')
@@ -105,4 +106,5 @@ def quiz_answers():
     the_user = current_user
     the_user.points = current_user.points + (correct * 100)
     db_add_commit(the_user)
-    return '<h1>Correct Answers: <u>' + str(correct) + "</u></h1> <h3><a href="+'"games"'+">Click here to play again!</a></h3>"
+    return '<h1>Correct Answers: <u>' + str(
+        correct) + "</u></h1> <h3><a href=" + '"games"' + ">Click here to play again!</a></h3>"

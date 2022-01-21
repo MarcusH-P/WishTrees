@@ -54,7 +54,6 @@ def register():
 
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-
     # if session attribute logins does not exist create attribute logins
     if not session.get('logins'):
         session['logins'] = 0
@@ -151,7 +150,6 @@ def donate():
 
     # if request method is POST or form is valid
     if form.validate_on_submit():
-
         # create a new user with the form data
         new_donation = Donation(
             user_key=current_user.user_key,
@@ -170,13 +168,11 @@ def donate():
 @users_blueprint.route('/billing', methods=['GET', 'POST'])
 @login_required
 def billing(product):
-
     # create billing form object
     form = BillingForm()
 
     # if request method is POST or form is valid
     if form.validate_on_submit():
-
         # create a new order with the form data
         new_order = Order(
             product_number=product,

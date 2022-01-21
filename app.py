@@ -5,8 +5,6 @@ from flask_login import LoginManager, current_user
 from flask_bootstrap import Bootstrap
 from functools import wraps
 
-
-
 # CONFIG
 app = Flask(__name__)
 # Connecting to mysql database using python sql alchemy
@@ -28,7 +26,9 @@ def requires_roles(*roles):
                 # Redirect the user to an unauthorised notice!
                 return redirect(url_for('403'))
             return f(*args, **kwargs)
+
         return wrapped
+
     return wrapper
 
 
@@ -117,6 +117,7 @@ if __name__ == '__main__':
     @login_manager.user_loader
     def load_user(user_key):
         return User.query.get(user_key)
+
 
     # import blueprints
     from user.views import users_blueprint

@@ -19,8 +19,8 @@
                 {{ form.csrf_token() }}
                 <div class="control">
                     {{ form.donation(class="input", placeholder="Donation in £") }}
-                    {%  for error in form.donation.errors %}
-                        {{ error }}
+                    {% for error in form.donation.errors %}
+                    {{ error }}
                     {% endfor %}
                 </div>
             </div>
@@ -29,11 +29,10 @@
                 <div class="control">
                     {{ form.cardnum(class="input", placeholder="Card Number") }}
                     {% for error in form.cardnum.errors %}
-                        {{ error }}
+                    {{ error }}
                     {% endfor %}
                 </div>
             </div>
-
 
 
             <div>

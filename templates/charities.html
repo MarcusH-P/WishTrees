@@ -1,110 +1,132 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <style>
-        .box{
-            background-color: #c993dc;
-            width: 100%;
-        }
-        .box2{
-            width: 100%;
-        }
-        .column {
-            position: relative;
-            float: left;
-            width: 20%;
-            padding: 5px;
-        }
+<style>
+    .box {
+        background-color: #c993dc;
+        width: 100%;
+    }
 
-        .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-    </style>
-    <h1 class="title" style="color: #c993dc">Our Charities</h1>
-    <hr style="width:50%;text-align:center;margin-left:25%; background-color: #c993dc">
-    <div class="box">
-        <div class="row">
-            <div class="column">
-                <img src="https://lh3.googleusercontent.com/pw/AM-JKLWmIha_jHta6quYmY6OYxepEgYhAuoGb2pAL9ZOX6WcXP1sqIbIbPGMUI9SswySZsKEWvY9uIvlqwP8cXv2v1JXnzNSdPNef-PKxSJt4khDmyi4vRR2DpqNpeNwX4qPj8HyJtGCCfRL7j9BLZ2CeA=w200-h300-no" alt="mushroom_ad">
-            </div>
-            <div class="column">
-                <img src="https://lh3.googleusercontent.com/pw/AM-JKLW06QsLA3Fjor8GZSFgLV4VpBa8c6iPHgLfY_mTcNMObz-zO38jooA9PXcPvRIoDOyxzvAHL0nupR5JLsb6zWa0RmG0qoVo3UgoauHEgGf8saF2Q5O00F2CiKQPSHspFXMqVOTXN-eSgkotfB-nQg=w677-h902-no" alt="wishtreeslogo">
-            </div>
-            <div class="column">
-                <img src="https://lh3.googleusercontent.com/pw/AM-JKLWEdTc8alhDpleJnd7160WxRxLZBDlduOILR47fntpKq5KJ9t5Xx8d8SoOvMOAA4LVtrBOegurFLVAq9rDHVJ3gdNxLexhPCC9a1iHfp1hX5TCzkrviI7rQ8GqPOoxZcISMbf6GAFnPwufl6SjMLQ=w677-h902-no" alt="treesruslogo">
-            </div>
-            <div class="column">
-                <img src="https://lh3.googleusercontent.com/pw/AM-JKLV8kUOmG8C_ngoJpn1VGLgiqI_60oV7P1kA3Ld2Y8GfT7rVn2xlRr-RcBHDaVaf1fQKrtUx3RFzF-5R-eKUCqP2iLd2HfSHynlaHDCaKip3yJW2Wpbv1ApMAWazGfhLYf2BihJdg4x0RTPbWfs-HA=w677-h902-no" alt="powerplanterslogo">
-            </div>
-            <div class="column">
-                <img src="https://lh3.googleusercontent.com/pw/AM-JKLVnjtcNoEaLeXK5B0WrPEMFFZuyT9Hct3GutTugXHEYRWzjkP2pgjKqG1aO5c267zfTLtpMbHLXPzsaYCrzRUP-gRN1OJGw737FlLhOyPZ_VXlL_j1hUvAxDYZywXUD_9oIW-g3O8W6lSSkE6vZSw=w200-h300-no" alt="gift_ad">
-            </div>
+    .box2 {
+        width: 100%;
+    }
+
+    .column {
+        position: relative;
+        float: left;
+        width: 20%;
+        padding: 5px;
+    }
+
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+<h1 class="title" style="color: #c993dc">Our Charities</h1>
+<hr style="width:50%;text-align:center;margin-left:25%; background-color: #c993dc">
+<div class="box">
+    <div class="row">
+        <div class="column">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLWmIha_jHta6quYmY6OYxepEgYhAuoGb2pAL9ZOX6WcXP1sqIbIbPGMUI9SswySZsKEWvY9uIvlqwP8cXv2v1JXnzNSdPNef-PKxSJt4khDmyi4vRR2DpqNpeNwX4qPj8HyJtGCCfRL7j9BLZ2CeA=w200-h300-no"
+                 alt="mushroom_ad">
+        </div>
+        <div class="column">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLW06QsLA3Fjor8GZSFgLV4VpBa8c6iPHgLfY_mTcNMObz-zO38jooA9PXcPvRIoDOyxzvAHL0nupR5JLsb6zWa0RmG0qoVo3UgoauHEgGf8saF2Q5O00F2CiKQPSHspFXMqVOTXN-eSgkotfB-nQg=w677-h902-no"
+                 alt="wishtreeslogo">
+        </div>
+        <div class="column">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLWEdTc8alhDpleJnd7160WxRxLZBDlduOILR47fntpKq5KJ9t5Xx8d8SoOvMOAA4LVtrBOegurFLVAq9rDHVJ3gdNxLexhPCC9a1iHfp1hX5TCzkrviI7rQ8GqPOoxZcISMbf6GAFnPwufl6SjMLQ=w677-h902-no"
+                 alt="treesruslogo">
+        </div>
+        <div class="column">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLV8kUOmG8C_ngoJpn1VGLgiqI_60oV7P1kA3Ld2Y8GfT7rVn2xlRr-RcBHDaVaf1fQKrtUx3RFzF-5R-eKUCqP2iLd2HfSHynlaHDCaKip3yJW2Wpbv1ApMAWazGfhLYf2BihJdg4x0RTPbWfs-HA=w677-h902-no"
+                 alt="powerplanterslogo">
+        </div>
+        <div class="column">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLVnjtcNoEaLeXK5B0WrPEMFFZuyT9Hct3GutTugXHEYRWzjkP2pgjKqG1aO5c267zfTLtpMbHLXPzsaYCrzRUP-gRN1OJGw737FlLhOyPZ_VXlL_j1hUvAxDYZywXUD_9oIW-g3O8W6lSSkE6vZSw=w200-h300-no"
+                 alt="gift_ad">
         </div>
     </div>
-    <h2 class="title" style="color: #c993dc">Our Projects</h2>
-    <hr style="width:50%;text-align:center;margin-left:25%; background-color: #c993dc">
-    <div class="box">
-        <div class="row">
-            <div class="column">
-                <img src="https://lh3.googleusercontent.com/pw/AM-JKLX23YvfMbqc0q-hbIcNqPFa7IazufVEwxj0mBCnvDd8p9w4i0NNpAV2YInRsUVJVof2Jc86N9TBYB9a9THbpnaAT6Zj3b7kbdG8Vke5mSwCwzEnTjBLTUT821Y9r6nXU0vKkhfT0K8J6SkEmL1CuQ=w200-h300-no" alt="llama_ad">
-            </div>
-            <div class="column">
-                <div class="box2">
-                    <img src="https://lh3.googleusercontent.com/VL5_LC5cII82ND4GBfzXdjXt7qpW912d9-7lUKeddt6IaR1RXZwWJ0Pc4GKDG4OcImIHSuOVJv-Cbcn8g9SvVZTqLe6UjbGvpeSFWiFHXCEXoFr1NYvAkLNsVrztfnCwjsNsXKri15obYnyggMOrF-A-IeTA7Vvt-uAxpI18mRiCGVfYiRZJ1fXdovDC1NuFFAPWH3ak8Cl129ewf7QNWwtDcJYkx7UuuimiqAyyc9vTOwv9Pt7lG-SJL8levS2B83LH84BqwdYxHWpARVUWBpDw-JgnOeIrWYqoynAhPOgWWQ_s8JuxNIyrHoeei6SLWFCsJC1zorwtUKs2yDf3RTeLd--pGbhS4ci23diQkt17D5-UPWBLDjiIHXrnKyQbDC-JDhdtxhKdIbU8JrUNg2H2rAYlhbxY_7a8kfnYGnpMTk1NbhM_7EcD9eJ8aMSMVBqfMcx1Im8fJ9YPK46sIhPY0MPH679sSjAxCbv4xMqqvrmesFR27xOAA1YlTOVzQVr02PrPkn3Q1UW3fnIhzk7MB5MKbFdcofNV3gQrHwXComOTyDOTRdWq8GseR5QP1WpORP8bOvIxwk0HEYzc_VxKj9e9xNEqivt2jJFCo3CPC17Nb-RRTe0AcWFUYsqpUjXLZTLdwu_XrY046fLubJqGqipShuOqav3scn42EJmU8HeWGGqvIlsWT-lBJ1TW29U0OfXrCt0T7pefyw=w800-h500-no" alt="Project_1_img">
-                    <p>We aim by the end of 2022 to plant 5000 trees in the Amazon rainforest. We are trying to restore the forest to its original state. To help us you can DONATE, buy our products or try our quizzes.</p>
-                </div>
-            </div>
-            <div class="column">
-                <div class="box2">
-                    <img src="https://lh3.googleusercontent.com/d_bPskpLh0eiF5xloQVRgP3PJ5tIZyMTUUIJ3Q5GW0v8SO5yxlkrhjpNm4uC8fSEi_vQiI4NkgN6q1KdONS6Tw0sqsUlzgVSUe8Lk2QqpBfp_bbrGH9sI36JM5RPaJu2-Xn4MqvtjyEYUCSYJe1-b1_3swH5SPlLNawZEFMrPdrigba76dISHJIxhsIEPtHmBccB-xKw08qTKyvwQLkvqeKK4-0q-XVWvLnMH3i0aqnvxJTqD8T5J7Yyykw_4DLE8L-CZ4giR6adlxBG6vS0eLS79evfYbG2coGgjcDn_0UmFOgY1x9Ez3VSTfRYO3GCG9RdvuWl8W5sYE2bc74ZLivUlzA6JLwd_UB84XBwrq7AeVQUNVjFwua6BVcS8qigG3Os7VOZUSw-gCJu2tLCB5Jq4sdbRvjGlK2vJUAwHzTV5p2aPnbUQEqmv-KH2tmNtF-e-zS-nWRBb0JGvXC_Nl1oWZqY157qn91z7TC1zBZ3UidaAJyVDfZA7cmW7bhUxGN1JIx0DyBGir9UhTO3JEzthyHg49f3j9EhYKdoKf8o5K7OZN0N1xmZ6ZDhY_KxxXQ8vMh7BwgtumZIvpn3Xr8byBHdh22128Sd3AnIAoFA86Bh_jeOMDJp6bRGGiVoYuG7IJ5CErGQKogoJq3yJ7sCHr0qYTvNKUy6YefR-nha33azGRPxq__TUsLH5AMMyrbWwNYgT4csaGudCQ=w800-h500-no" alt="Project_2_img">
-                    <p>
-                        This photo is from Myanmar. We are trying to restore this forest. Our plan is to plant 3000 trees in the next few months, but we need your help. Please consider donating.
-                    </p>
-                </div>
-            </div>
-            <div class="column">
-                <div class="box2">
-                    <img src="https://lh3.googleusercontent.com/kk3-r7Om0OjHBOzy9r1S2xAIer5DJQeeA274BMIRQZee37vLuC_JGf6fYlvVbCFOH4lv1CdzFVK-wUqYgvRyay4kvo-q9rXJk8vSajbLATZ50gX7ninKWLP3ATZ1ElD3duHUrtlvrXsIVbd52Q10TlX4bKZiEWD-2wQBx2t05_XYgda8UfHsrtcm46yXGioS5BWAUz7Venet19ZzCVRLm3qOmrCLOhT1h8bQKr4UfNDHsBAVSk9tWvPhIb0ECU5r-8NkqtTuomB6FZT4Y2tipXGjtQs3f2nFX0hEmgovCk2N6Xgbq1uv724SiFe_Xtw12Bredb5sWsuG4dTlyTAcaI9C3VcyB6ryprW0TvZ2k9j9YxtOtWwXGbi7JUBUU5LHpec5ohtSBBYd1-dbikFlv7hoyZDWGJUD0ymGF8IHLTWaASeUiVrDyI_qywaJ1hIRTKH7j15ggmBoydhSf_fozIELi4hjsPP7N9USPf1LE-XvQCFILqUDVdUTOdQ5BtXHgGTAXTqk8J2qt6WyCDO0Q-uiLNlxEhQ6SD53A_qt9W6c3UnJpg4240V9tG7HqVP7F21k1fcsb2ZlmF4aNZzLwofjlbi1E_vSlP2Wn9cliir3sD6PwewjIg67VVbhrJocjkcY62jyNtIH0yolxnnxc6_fUNqLCz_NhrrRVzMwXGiBJBIGesOp_FqHjZ7VP-S2TEHwDMeGQi8uyXc-6w=w800-h500-no" alt="Project_3_img">
-                    <p>
-                        In the UK more than 26 million hectares of trees is cut down each year. Please help us raise awareness and plant trees. Our goal is to plant 8000 trees by the end of 2022 in the UK. DONATE!!!
-                    </p>
-                </div>
-            </div>
-            <div class="column">
-                <img src="https://lh3.googleusercontent.com/pw/AM-JKLVeTpe4VoBdlwfQT2cZl2-vmuGW2U8H1UruG5-uFZ2oJmlNB_gFve60LyqKs7ht-yroBfhkxSPqju_0b8LUBGFiJGog9CyTANy11CRUKep1Nj3L6m8DzlUsjxyLARr3wbnnePLogNSLBGiz7PHwOQ=w200-h300-no" alt="PANDA_AD">
+</div>
+<h2 class="title" style="color: #c993dc">Our Projects</h2>
+<hr style="width:50%;text-align:center;margin-left:25%; background-color: #c993dc">
+<div class="box">
+    <div class="row">
+        <div class="column">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLX23YvfMbqc0q-hbIcNqPFa7IazufVEwxj0mBCnvDd8p9w4i0NNpAV2YInRsUVJVof2Jc86N9TBYB9a9THbpnaAT6Zj3b7kbdG8Vke5mSwCwzEnTjBLTUT821Y9r6nXU0vKkhfT0K8J6SkEmL1CuQ=w200-h300-no"
+                 alt="llama_ad">
+        </div>
+        <div class="column">
+            <div class="box2">
+                <img src="https://lh3.googleusercontent.com/VL5_LC5cII82ND4GBfzXdjXt7qpW912d9-7lUKeddt6IaR1RXZwWJ0Pc4GKDG4OcImIHSuOVJv-Cbcn8g9SvVZTqLe6UjbGvpeSFWiFHXCEXoFr1NYvAkLNsVrztfnCwjsNsXKri15obYnyggMOrF-A-IeTA7Vvt-uAxpI18mRiCGVfYiRZJ1fXdovDC1NuFFAPWH3ak8Cl129ewf7QNWwtDcJYkx7UuuimiqAyyc9vTOwv9Pt7lG-SJL8levS2B83LH84BqwdYxHWpARVUWBpDw-JgnOeIrWYqoynAhPOgWWQ_s8JuxNIyrHoeei6SLWFCsJC1zorwtUKs2yDf3RTeLd--pGbhS4ci23diQkt17D5-UPWBLDjiIHXrnKyQbDC-JDhdtxhKdIbU8JrUNg2H2rAYlhbxY_7a8kfnYGnpMTk1NbhM_7EcD9eJ8aMSMVBqfMcx1Im8fJ9YPK46sIhPY0MPH679sSjAxCbv4xMqqvrmesFR27xOAA1YlTOVzQVr02PrPkn3Q1UW3fnIhzk7MB5MKbFdcofNV3gQrHwXComOTyDOTRdWq8GseR5QP1WpORP8bOvIxwk0HEYzc_VxKj9e9xNEqivt2jJFCo3CPC17Nb-RRTe0AcWFUYsqpUjXLZTLdwu_XrY046fLubJqGqipShuOqav3scn42EJmU8HeWGGqvIlsWT-lBJ1TW29U0OfXrCt0T7pefyw=w800-h500-no"
+                     alt="Project_1_img">
+                <p>We aim by the end of 2022 to plant 5000 trees in the Amazon rainforest. We are trying to restore the
+                    forest to its original state. To help us you can DONATE, buy our products or try our quizzes.</p>
             </div>
         </div>
-    </div>
-    <h3 class="title" style="color: #c993dc">Charity Updates</h3>
-    <hr style="width:50%;text-align:center;margin-left:25%; background-color: #c993dc">
-    <div class="box">
-        <div class="row">
-            <div class="column">
-                <img src="https://lh3.googleusercontent.com/pw/AM-JKLU4wpPS-PlR8kSVDhOcSmXYdAeMe1ly1uVMx1PpOcQrudcyorPSZFMM5tjmOE3PuJdL5jnpXEhGVRmGtJQj85TdOzEd30RPTtvb6wZ9VrPWKyRMID3ZuiwdkjBSfqibq3ZiQp3w3gbk0fIP78nuKg=w200-h300-no" alt="jungle_ad">
-            </div>
-            <div class="column">
-                <div class="box2">
-                    <img src="https://treetrust.org/wp-content/uploads/2021/08/DSC_0178-1024x683.jpg" alt="volunteers">
-                     Wish Trees has planted 20000 trees all over the world, this summer, helping the world become how it once was.
-                </div>
-            </div>
-            <div class="column">
-                <div class="box2">
-                    <img src="https://greenabilitymagazine.com/wp-content/uploads/2017/10/FINAL-Tree-planting-2-WEB.jpg" alt="volunteers2">
-                    Trees "R" Us only this year planted over 100000 trees in partnership with Wish Trees. If you want them to keep up the good work please DONATE!
-                </div>
-            </div>
-            <div class="column">
-                <div class="box2">
-                    <img src="https://caseytrees.org/wp-content/uploads/2019/08/6d67406dae978d2b45780908aa763281.jpg" alt="volunteers3">
-                    Power Planters in partnership with WishTrees planted over 80000 trees this year. If you want them to keep up the good work please DONATE!
-                </div>
-            </div>
-            <div class="column">
-                <img src="https://lh3.googleusercontent.com/pw/AM-JKLXijgJMfXHb_m-DVv7adjHg26dN7JiKdnLE1ftibC5ZcUY2P8It4ueGlmbs7JXgBNredW0TsPpOcEQ_3gh0B-OND7QqvV3LnXLnnquSx4mObkXgwA6KCrZquqoYVXjK9wAahYcyMZWnJwBaQegxew=w200-h300-no" alt="book_ad">
+        <div class="column">
+            <div class="box2">
+                <img src="https://lh3.googleusercontent.com/d_bPskpLh0eiF5xloQVRgP3PJ5tIZyMTUUIJ3Q5GW0v8SO5yxlkrhjpNm4uC8fSEi_vQiI4NkgN6q1KdONS6Tw0sqsUlzgVSUe8Lk2QqpBfp_bbrGH9sI36JM5RPaJu2-Xn4MqvtjyEYUCSYJe1-b1_3swH5SPlLNawZEFMrPdrigba76dISHJIxhsIEPtHmBccB-xKw08qTKyvwQLkvqeKK4-0q-XVWvLnMH3i0aqnvxJTqD8T5J7Yyykw_4DLE8L-CZ4giR6adlxBG6vS0eLS79evfYbG2coGgjcDn_0UmFOgY1x9Ez3VSTfRYO3GCG9RdvuWl8W5sYE2bc74ZLivUlzA6JLwd_UB84XBwrq7AeVQUNVjFwua6BVcS8qigG3Os7VOZUSw-gCJu2tLCB5Jq4sdbRvjGlK2vJUAwHzTV5p2aPnbUQEqmv-KH2tmNtF-e-zS-nWRBb0JGvXC_Nl1oWZqY157qn91z7TC1zBZ3UidaAJyVDfZA7cmW7bhUxGN1JIx0DyBGir9UhTO3JEzthyHg49f3j9EhYKdoKf8o5K7OZN0N1xmZ6ZDhY_KxxXQ8vMh7BwgtumZIvpn3Xr8byBHdh22128Sd3AnIAoFA86Bh_jeOMDJp6bRGGiVoYuG7IJ5CErGQKogoJq3yJ7sCHr0qYTvNKUy6YefR-nha33azGRPxq__TUsLH5AMMyrbWwNYgT4csaGudCQ=w800-h500-no"
+                     alt="Project_2_img">
+                <p>
+                    This photo is from Myanmar. We are trying to restore this forest. Our plan is to plant 3000 trees in
+                    the next few months, but we need your help. Please consider donating.
+                </p>
             </div>
         </div>
+        <div class="column">
+            <div class="box2">
+                <img src="https://lh3.googleusercontent.com/kk3-r7Om0OjHBOzy9r1S2xAIer5DJQeeA274BMIRQZee37vLuC_JGf6fYlvVbCFOH4lv1CdzFVK-wUqYgvRyay4kvo-q9rXJk8vSajbLATZ50gX7ninKWLP3ATZ1ElD3duHUrtlvrXsIVbd52Q10TlX4bKZiEWD-2wQBx2t05_XYgda8UfHsrtcm46yXGioS5BWAUz7Venet19ZzCVRLm3qOmrCLOhT1h8bQKr4UfNDHsBAVSk9tWvPhIb0ECU5r-8NkqtTuomB6FZT4Y2tipXGjtQs3f2nFX0hEmgovCk2N6Xgbq1uv724SiFe_Xtw12Bredb5sWsuG4dTlyTAcaI9C3VcyB6ryprW0TvZ2k9j9YxtOtWwXGbi7JUBUU5LHpec5ohtSBBYd1-dbikFlv7hoyZDWGJUD0ymGF8IHLTWaASeUiVrDyI_qywaJ1hIRTKH7j15ggmBoydhSf_fozIELi4hjsPP7N9USPf1LE-XvQCFILqUDVdUTOdQ5BtXHgGTAXTqk8J2qt6WyCDO0Q-uiLNlxEhQ6SD53A_qt9W6c3UnJpg4240V9tG7HqVP7F21k1fcsb2ZlmF4aNZzLwofjlbi1E_vSlP2Wn9cliir3sD6PwewjIg67VVbhrJocjkcY62jyNtIH0yolxnnxc6_fUNqLCz_NhrrRVzMwXGiBJBIGesOp_FqHjZ7VP-S2TEHwDMeGQi8uyXc-6w=w800-h500-no"
+                     alt="Project_3_img">
+                <p>
+                    In the UK more than 26 million hectares of trees is cut down each year. Please help us raise
+                    awareness and plant trees. Our goal is to plant 8000 trees by the end of 2022 in the UK. DONATE!!!
+                </p>
+            </div>
+        </div>
+        <div class="column">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLVeTpe4VoBdlwfQT2cZl2-vmuGW2U8H1UruG5-uFZ2oJmlNB_gFve60LyqKs7ht-yroBfhkxSPqju_0b8LUBGFiJGog9CyTANy11CRUKep1Nj3L6m8DzlUsjxyLARr3wbnnePLogNSLBGiz7PHwOQ=w200-h300-no"
+                 alt="PANDA_AD">
+        </div>
     </div>
+</div>
+<h3 class="title" style="color: #c993dc">Charity Updates</h3>
+<hr style="width:50%;text-align:center;margin-left:25%; background-color: #c993dc">
+<div class="box">
+    <div class="row">
+        <div class="column">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLU4wpPS-PlR8kSVDhOcSmXYdAeMe1ly1uVMx1PpOcQrudcyorPSZFMM5tjmOE3PuJdL5jnpXEhGVRmGtJQj85TdOzEd30RPTtvb6wZ9VrPWKyRMID3ZuiwdkjBSfqibq3ZiQp3w3gbk0fIP78nuKg=w200-h300-no"
+                 alt="jungle_ad">
+        </div>
+        <div class="column">
+            <div class="box2">
+                <img src="https://treetrust.org/wp-content/uploads/2021/08/DSC_0178-1024x683.jpg" alt="volunteers">
+                Wish Trees has planted 20000 trees all over the world, this summer, helping the world become how it once
+                was.
+            </div>
+        </div>
+        <div class="column">
+            <div class="box2">
+                <img src="https://greenabilitymagazine.com/wp-content/uploads/2017/10/FINAL-Tree-planting-2-WEB.jpg"
+                     alt="volunteers2">
+                Trees "R" Us only this year planted over 100000 trees in partnership with Wish Trees. If you want them
+                to keep up the good work please DONATE!
+            </div>
+        </div>
+        <div class="column">
+            <div class="box2">
+                <img src="https://caseytrees.org/wp-content/uploads/2019/08/6d67406dae978d2b45780908aa763281.jpg"
+                     alt="volunteers3">
+                Power Planters in partnership with WishTrees planted over 80000 trees this year. If you want them to
+                keep up the good work please DONATE!
+            </div>
+        </div>
+        <div class="column">
+            <img src="https://lh3.googleusercontent.com/pw/AM-JKLXijgJMfXHb_m-DVv7adjHg26dN7JiKdnLE1ftibC5ZcUY2P8It4ueGlmbs7JXgBNredW0TsPpOcEQ_3gh0B-OND7QqvV3LnXLnnquSx4mObkXgwA6KCrZquqoYVXjK9wAahYcyMZWnJwBaQegxew=w200-h300-no"
+                 alt="book_ad">
+        </div>
+    </div>
+</div>
 {% endblock %}

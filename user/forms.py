@@ -6,7 +6,7 @@ from user.billing import valid_payment
 
 
 # Character check to check for special characters (prevents security exploits)
-def character_check(form,field):
+def character_check(form, field):
     excluded_chars = "*?!'^+%&/()=}][{$#@<>"
     for char in field.data:
         if char in excluded_chars:
@@ -21,8 +21,10 @@ class RegisterForm(FlaskForm):
 
     # MAYBE INCLUDE PREFIX FOR INTERNATIONAL NUMBERS? (Can be done jankily very easily)
     phone = StringField(validators=[Length(min=0, max=12, message='This is not a valid phone number')])
-    password = PasswordField(validators=[InputRequired(), Length(min=8, max=20, message='Password must be between 8 and 20 characters in length.')])
-    confirm_password = PasswordField(validators=[InputRequired(), EqualTo('password', message='Both password fields must be equal!')])
+    password = PasswordField(validators=[InputRequired(), Length(min=8, max=20,
+                                                                 message='Password must be between 8 and 20 characters in length.')])
+    confirm_password = PasswordField(
+        validators=[InputRequired(), EqualTo('password', message='Both password fields must be equal!')])
     submit = SubmitField()
 
     # Password validator
@@ -40,9 +42,9 @@ class LoginForm(FlaskForm):
 
 
 class DonateForm(FlaskForm):
-
     donation = IntegerField(validators=[InputRequired()])
-    cardnum = StringField(validators=[InputRequired(), Length(min=16, max=16, message='Card number must be 16 digits in length')])
+    cardnum = StringField(
+        validators=[InputRequired(), Length(min=16, max=16, message='Card number must be 16 digits in length')])
 
     # TODO add CVC to
     # cvc = StringField(validators=[InputRequired(), Length(min=2, max=3, message='CVV must be 3 digits long')])
@@ -58,12 +60,14 @@ class DonateForm(FlaskForm):
 
 
 class BillingForm(FlaskForm):
-
-    address_1 = StringField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
+    address_1 = StringField(
+        validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
     address_2 = StringField(validators=[Length(min=3, max=100, message="This field doesn't look right")])
-    city_town = StringField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
+    city_town = StringField(
+        validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
     county = StringField(validators=[InputRequired(), Length(min=3, max=100, message="This field doesn't look right")])
-    cardnum = StringField(validators=[InputRequired(), Length(min=16, max=16, message='Card number must be 16 digits in length')])
+    cardnum = StringField(
+        validators=[InputRequired(), Length(min=16, max=16, message='Card number must be 16 digits in length')])
 
     # TODO add CVC
     # cvc = StringField(validators=[InputRequired(), Length(min=2, max=3, message='CVV must be 3 digits long')])
