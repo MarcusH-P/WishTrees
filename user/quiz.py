@@ -76,7 +76,7 @@ def quiz2():
         random.shuffle(questions[i])
     session['questions'] = questions
     session['answers'] = LifeOnLand_questions
-    return render_template('quiz1.html', q=questions_shuffled, o=questions)
+    return render_template('quiz2.html', q=questions_shuffled, o=questions)
 
 
 @quiz_blueprint.route('/quiz3')
@@ -87,7 +87,7 @@ def quiz3():
         random.shuffle(questions[i])
     session['questions'] = questions
     session['answers'] = PowerPlanters_questions
-    return render_template('quiz1.html', q=questions_shuffled, o=questions)
+    return render_template('quiz3.html', q=questions_shuffled, o=questions)
 
 
 @quiz_blueprint.route('/quiz', methods=['POST'])
