@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h3 class="title is-3">WishTrees Administration
+    <h3 class="title is-3" style="color: #c993dc">WishTrees Administration
     </h3>
     <div class="column is-10 is-offset-1">
         {% with messages = get_flashed_messages() %}
@@ -13,8 +13,8 @@
             {% endif %}
         {% endwith %}
 
-        <h4 class="title is-4">All users</h4>
-        <div class="box">
+        <h4 class="title is-4" style="color: #c993dc">All users</h4>
+        <div class="box" style="background-color: #c993dc">
             {% if all_users %}
                 <div class="field">
                     <table class="table">
@@ -43,12 +43,12 @@
             {% endif %}
             <form method="POST" action="/view_users">
                 <div>
-                    <button class="button is-info is-centered">View All Users</button>
+                    <button class="button is-info is-centered" style="background-color: #000732">View All Users</button>
                 </div>
             </form>
         </div>
-        <h4 class="title is-4">All donations</h4>
-        <div class="box">
+        <h4 class="title is-4" style="color: #c993dc">All donations</h4>
+        <div class="box" style="background-color: #c993dc">
             {% if all_donations %}
                 <div class="field">
                     <table class="table">
@@ -69,14 +69,14 @@
             {% endif %}
             <form method="POST" action="/view_donations">
                 <div>
-                    <button class="button is-info is-centered">View All Donations</button>
+                    <button class="button is-info is-centered" style="background-color: #000732">View All Donations</button>
                 </div>
             </form>
         </div>
     </div>
     <div class="column is-8 is-offset-2">
-        <h4 class="title is-4">Delete user</h4>
-        <div class="box">
+        <h4 class="title is-4" style="color: #c993dc">Delete user</h4>
+        <div class="box" style="background-color: #c993dc">
             <form method="POST" action="/delete_user">
                 <div class="columns is-multiline is-centered">
                     <div class="column is-one-sixth">
@@ -84,13 +84,13 @@
                     </div>
                 </div>
                 <div>
-                    <button class="button is-info is-centered">Delete user</button>
+                    <button class="button is-info is-centered" style="background-color: #000732">Delete user</button>
                 </div>
             </form>
         </div>
     </div>
-    <h4 class="title is-4">Security Events</h4>
-        <div class="box">
+    <h4 class="title is-4" style="color: #c993dc">Security Events</h4>
+        <div class="box" style="background-color: #c993dc">
             {% if all_events %}
                 <div class="field">
                     <table class="table">
@@ -113,12 +113,12 @@
             {% endif %}
             <form method="POST" action="/view_security">
                 <div>
-                    <button class="button is-info is-centered">View Security Events</button>
+                    <button class="button is-info is-centered" style="background-color: #000732">View Security Events</button>
                 </div>
             </form>
         </div>
-        <h4 class="title is-4">Security Errors</h4>
-        <div class="box">
+        <h4 class="title is-4" style="color: #c993dc">Security Errors</h4>
+        <div class="box" style="background-color: #c993dc">
             {% if all_errors %}
                 <div class="field">
                     <table class="table">
@@ -139,7 +139,7 @@
             {% endif %}
             <form method="POST" action="/view_security_errors">
                 <div>
-                    <button class="button is-info is-centered">View Security Errors</button>
+                    <button class="button is-info is-centered" style="background-color: #000732">View Security Errors</button>
                 </div>
             </form>
         </div>
