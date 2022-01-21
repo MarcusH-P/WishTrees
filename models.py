@@ -191,4 +191,48 @@ def init_db():
                  role='admin',
                  phone=None)
     db.session.add(admin)
+
+    product_1 = Product(product_number="pp_tshirt_black_20",
+                        product_type="T Shirt",
+                        product_colour="Black",
+                        charity_name="Power Planters",
+                        price="20")
+
+    product_2 = Product(product_number="wt_tshirt_black_20",
+                        product_type="T Shirt",
+                        product_colour="Black",
+                        charity_name="WishTrees",
+                        price="20")
+
+    product_3 = Product(product_number="pp_tshirt_white_20",
+                        product_type="T Shirt",
+                        product_colour="White",
+                        charity_name="Power Planters",
+                        price="20")
+
+    product_4 = Product(product_number="tru_tshirt_white_20",
+                        product_type="T Shirt",
+                        product_colour="White",
+                        charity_name="Trees R Us",
+                        price="20")
+
+    product_5 = Product(product_number="tru_hoodie_black_40",
+                        product_type="Hoodie",
+                        product_colour="Black",
+                        charity_name="Trees R Us",
+                        price="40")
+
+    product_6 = Product(product_number="wt_tshirt_grey_25",
+                        product_type="T Shirt",
+                        product_colour="Grey",
+                        charity_name="WishTrees",
+                        price="25")
+
+    db.session.add(product_1)
+    db.session.add(product_2)
+    db.session.add(product_3)
+    db.session.add(product_4)
+    db.session.add(product_5)
+    db.session.add(product_6)
+
     db.session.commit()
