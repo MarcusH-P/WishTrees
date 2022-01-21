@@ -97,9 +97,11 @@
                            <a href="{{ url_for('users.donate')}}" class="navbar-item"  style=" color: #c993dc;">
                                DONATE
                            </a>
+                           {% if current_user.is_authenticated and current_user.role == 'admin' %}
                            <a href="{{ url_for('admin')}}" class="navbar-item" style=" color: #c993dc;">
                                Admin
                            </a>
+                           {%endif%}
                            <a href="{{ url_for('shop')}}" class="navbar-item" style=" color: #c993dc;">
                                Shop
                            </a>
