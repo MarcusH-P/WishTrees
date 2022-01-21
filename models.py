@@ -192,6 +192,7 @@ def init_db():
                  phone=None)
     db.session.add(admin)
 
+    # Adding all current products to the DB
     product_1 = Product(product_number="pp_tshirt_black_20",
                         product_type="T Shirt",
                         product_colour="Black",
