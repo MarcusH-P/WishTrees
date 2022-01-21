@@ -3,6 +3,32 @@
 {% block content %}
 
 <div class="column is-6 is-offset-3">
-    <h3 class="title">Games</h3>
+
+    <h1 class="title" style="color: #c993dc">Games Selection Menu</h1>
+
+    <br>
+
+    <div class="column">
+        <a href="{{ url_for('quiz.quiz1') }}">
+            <h1 style="color: #c993dc">Quiz 1 - WishTrees</h1>
+        </a>
+    </div>
+    <br>
+
+    <div class="column">
+        <a href="{{ url_for('quiz.quiz3') }}">
+            <h1 style="color: #c993dc">Quiz 2 - Life On Land</h1>
+        </a>
+    </div>
+    <br>
+
+    <div class="column">
+        <a href="{{ url_for('quiz.quiz3') }}">
+            <h1 style="color: #c993dc">Quiz 3 - PowerPlanters</h1>
+        </a>
+    </div>
+    <br>
+
 </div>
+
 {% endblock %}
