@@ -183,10 +183,11 @@ class Donation(UserMixin, db.Model):
 def init_db():
     db.drop_all()
     db.create_all()
-    admin = User(email='admin@email.com',
-                 password='Admin1!',
-                 firstname='Alice',
-                 lastname='Jones',
+
+    admin = User(email='admin@gmail.com',
+                 password='Passw0rd!',
+                 firstname='Alex',
+                 lastname='Smith',
                  role='admin',
                  phone=None)
     db.session.add(admin)
