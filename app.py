@@ -100,6 +100,7 @@ def db_add_commit(an_object):  # Makes commit to db more compact
     db.session.commit()
 
 
+# Reference to CSC2031 lottery web app
 if __name__ == '__main__':
     my_host = "127.0.0.1"
     free_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

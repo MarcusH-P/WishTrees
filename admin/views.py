@@ -17,6 +17,7 @@ def admin():
     return render_template('admin.html')
 
 
+# Reference to CSC2031 lottery web app
 @admin_blueprint.route('/view_users', methods=['POST'])
 @login_required
 @requires_roles('admin')

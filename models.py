@@ -8,6 +8,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 
 
+# Reference to CSC2031 lottery web app
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
@@ -37,7 +38,7 @@ class User(UserMixin, db.Model):
         self.firstname = firstname
         self.lastname = lastname
         self.phone = phone
-        self.password = generate_password_hash(password)  # IS THIS HASH GOOD? IDK PROBABLY
+        self.password = generate_password_hash(password)
         self.role = role
         self.registered_on = datetime.now()
         self.last_logged_in = None

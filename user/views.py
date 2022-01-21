@@ -1,13 +1,12 @@
 import pyotp
 import pyqrcode
 from io import BytesIO
-from flask import render_template, flash, redirect, url_for, request, session, Blueprint
-from user.emails import email_users
-from user.forms import RegisterForm, LoginForm, DonateForm
-from models import User, Security, Donation, new_security_event, new_security_error
-from app import db, db_add_commit
+from flask import flash, session, Blueprint
+
+from models import new_security_event
+from app import db_add_commit
 from user.forms import RegisterForm, LoginForm, DonateForm, BillingForm
-from models import User, Security, Donation, Order
+from models import User, Donation, Order
 from app import db
 from werkzeug.security import check_password_hash
 from flask_login import login_user, current_user, logout_user, login_required
@@ -21,6 +20,7 @@ from flask import render_template, redirect, url_for
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
 
+# Reference to CSC2031 lottery web app
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     # create signup form object
@@ -32,7 +32,7 @@ def register():
         # if this returns a user, then the email already exists in database
 
         # if email already exists redirect user back to signup page with error message so user can try again
-        if user:  # I WANNA ADD A FUNCTION SO THAT IF THE USER HASNT LOGGED IN THEN THEY CAN REGISTER AGAIN !!DELETING THEIR OLD ACCOUNT FIRST!!!!!
+        if user:
             flash('Sorry. An account for that email already exists')
             return render_template('register.html', form=form)
 
@@ -57,6 +57,7 @@ def register():
     return render_template('register.html', form=form)
 
 
+# Reference to CSC2031 lottery web app
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     # if session attribute logins does not exist create attribute logins
@@ -136,6 +137,7 @@ def logout():
     return redirect(url_for('home'))
 
 
+# Reference to CSC2031 lottery web app
 @users_blueprint.route("/profile")
 @login_required
 def profile():
